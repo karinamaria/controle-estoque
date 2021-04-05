@@ -1,5 +1,6 @@
 package br.ufrn.imd.dao;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +36,12 @@ public class teste{
 		UsuarioUtil usuario = new UsuarioUtil();
 		Usuario u = new Usuario();
 		u.setLogin("ana");
-		u.setSenha(usuario.criptografarSenha("teste"));
+		try {
+			u.setSenha(usuario.criptografarSenha("teste"));
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		u.setPermissao(Papel.GERENTE);
 		
 		f.setEndereco(e);
