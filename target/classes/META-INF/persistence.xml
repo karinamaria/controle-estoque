@@ -6,7 +6,17 @@
 
     <persistence-unit name="persistence">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>br.ufrn.imd.modelo</class>
+		<class>br.ufrn.imd.modelo.Produto</class>
+		<class>br.ufrn.imd.modelo.Usuario</class>
+		<class>br.ufrn.imd.modelo.Endereco</class>
+		<class>br.ufrn.imd.modelo.Pessoa</class>
+		<class>br.ufrn.imd.modelo.Fornecedor</class>
+		<class>br.ufrn.imd.modelo.Funcionario</class>
+		<class>br.ufrn.imd.modelo.Departamento</class>
+		<class>br.ufrn.imd.modelo.ItemPedido</class>
+		<class>br.ufrn.imd.modelo.Pedido</class>
+		<class>br.ufrn.imd.modelo.HistoricoDeEntrada</class>
+		<class>br.ufrn.imd.modelo.HistoricoDeSaida</class>
 		
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name="endereco", schema="public")
 public class Endereco {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ENDERECO")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@SequenceGenerator(name="SEQ_ENDERECO", sequenceName="public.id_seq_endereco", allocationSize=1)
 	@Column(name="id_endereco")
 	private Integer id;

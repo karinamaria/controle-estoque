@@ -16,22 +16,35 @@ public abstract class DAOFactory <T> {
 	private static EntityManager manager = factory.createEntityManager();
 	
 	@SuppressWarnings("unchecked")
-	public Class<T> nomeClasse(){
+	private Class<T> nomeClasse(){
 		return (Class<T>) ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 	
 	/**
-	 * Salvar ou atualizar uma determinada entidade 
-	 * @param entidade entidade que será salva ou atualizada
-	 * @return a entidade atualizada
+	 * Salvar uma determinada entidade 
+	 * @param entidade entidade que será salva 
+	 * @return a entidade salva
 	 */
-	protected <S extends T> S salvar(S entidade) {
+	<S extends T> S salvar(S entidade) {
 		manager.getTransaction().begin();
-		manager.merge(entidade);
+		manager.persist(entidade);
 		manager.getTransaction().commit();
 		
 		return entidade;
 	}
+	
+	/**
+	 * Atualiza uma determinada entidade
+	 * @param entidade que será atualizada
+	 * @return a entidade atualizada
+	 */
+	<S extends T> S update(S entidade) {
+		manager.getTransaction().begin();
+		manager.merge(entidade);
+		manager.getTransaction().commit();
+		return entidade;
+	}
+	
 	/**
 	 * Remover entidade
 	 * @param entidade que será removida
@@ -46,7 +59,10 @@ public abstract class DAOFactory <T> {
 		
 	}
 	
-	
+	/**
+	 * Buscar todos os registros salvos de determinada entidade
+	 * @return a lista de registros encontrados
+	 */
 	@SuppressWarnings("unchecked")
 	List<T> buscarTodos(){
 		Query query = manager.createQuery("Select t from " + persistentClass.getSimpleName() + " t");
@@ -54,6 +70,11 @@ public abstract class DAOFactory <T> {
 		return list;
 	}
 	
+	/**
+	 * Buscar entidade por email
+	 * @param id da entidade que será buscada
+	 * @return entidade que refere-se ao id buscado
+	 */
 	@SuppressWarnings("unchecked")
 	T buscarPorId(Integer id) {
 		Query query = manager.createQuery("Select t from " + persistentClass.getSimpleName() + " t where t.id = :value1")
@@ -62,12 +83,26 @@ public abstract class DAOFactory <T> {
 		return (T) query.getSingleResult();
 	}
 	
+	/**
+	 * Buscar entidade por campos desejados
+	 * @param queryPesquisa string que representa a query de pesquisa
+	 * @return a entidade com base nos parâmetros buscados
+	 */
 	@SuppressWarnings("unchecked")
-	T buscarPorCampo(Object campo, Object value) {
-		Query query = manager.createQuery("Select t from " + persistentClass.getSimpleName() + " t where t."+campo.toString()+"= :value1")
-				.setParameter("value1", value);
-	
+	T buscarEntidadePorCampo(String queryPesquisa) {
+		Query query = manager.createQuery(queryPesquisa);
 		return (T) query.getSingleResult();
 	}
 	
+	/**
+	 * Buscar uma lista referente a uma entidade
+	 * @param queryPesquisa string que representa a query de pesquisa
+	 * @return a lista com objetos do tipo <T> com base nos parâmetros buscados
+	 */
+	@SuppressWarnings("unchecked")
+	List<T> buscarEntidadesPorCampos(String queryPesquisa){
+		Query query = manager.createQuery(queryPesquisa);
+		List<T> list = query.getResultList();
+		return list;
+	}
 }
