@@ -21,9 +21,9 @@ public abstract class DAOFactory <T> {
 	}
 	
 	/**
-	 * Salvar ou atualizar uma determinada entidade 
-	 * @param entidade entidade que será salva ou atualizada
-	 * @return a entidade atualizada
+	 * Salvar uma determinada entidade 
+	 * @param entidade entidade que será salva 
+	 * @return a entidade salva
 	 */
 	<S extends T> S salvar(S entidade) {
 		manager.getTransaction().begin();
@@ -32,6 +32,19 @@ public abstract class DAOFactory <T> {
 		
 		return entidade;
 	}
+	
+	/**
+	 * Atualiza uma determinada entidade
+	 * @param entidade que será atualizada
+	 * @return a entidade atualizada
+	 */
+	<S extends T> S update(S entidade) {
+		manager.getTransaction().begin();
+		manager.merge(entidade);
+		manager.getTransaction().commit();
+		return entidade;
+	}
+	
 	/**
 	 * Remover entidade
 	 * @param entidade que será removida
