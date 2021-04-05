@@ -13,8 +13,10 @@ Sistema de Controle de Estoque
 <!--te-->
 
 # Sobre
-O  objetivo do projeto é simular um sistema de controle de estoque. Para isso, criaremos 
+O  objetivo do projeto é simular um sistema de controle de estoque. Para isso, o projeto foi construído a partir de conhecimentos anteriores, bem como, os conhecimentos adquiridos durante a disciplina Linguagem de Programação II (IMD/UFRN)
+
+# Como usar
 
 # Autoras
 - Karina Maria - [@karinamaria](https://github.com/karinamaria)
-- Wadson Pontes - [@WadsonPontes](https://github.com/WadsonPontes)
+- Maria Eduarda - [@mariaeloi](https://github.com/mariaeloi)
