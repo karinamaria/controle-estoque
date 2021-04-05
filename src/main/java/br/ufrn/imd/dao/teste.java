@@ -1,25 +1,57 @@
 package br.ufrn.imd.dao;
 
-import br.ufrn.imd.modelo.Produto;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import br.ufrn.imd.modelo.Departamento;
+import br.ufrn.imd.modelo.Endereco;
+import br.ufrn.imd.modelo.Funcionario;
+import br.ufrn.imd.modelo.Papel;
+import br.ufrn.imd.modelo.Usuario;
 import br.ufrn.imd.util.UsuarioUtil;
 
 public class teste{
 
 	public static void main(String[] args) {
-		ProdutoDAO dao = new ProdutoDAO();
-//		Produto p = new Produto();
-//		
-//		p.setCodigo("123456");
-//		p.setNome("Arroz");
-//		p.setPrecoCompra(3.00);
-//		p.setPrecoVenda(5.50);
-//		p.setQuantidadeNoEstoque(200);
-//		dao.save(p);
-
+		Departamento d = new Departamento();
+		d.setNome("Manutenção");
 		
-		//List<Produto> prs = dao.buscarTodos();	
+		Funcionario f = new Funcionario();
+		f.setNome("Ana");
+		f.setEmail("ana@email.com");
+		f.setDataNascimento(new Date());
+		f.setTelefone("dmsdms");
+		
+		Endereco e = new Endereco();
+		e.setRua("Rua asas");
+		e.setBairro("sdsd");
+		e.setCidade("ss cc");
+		e.setCep("Cep 5959");
+		e.setPais("Brasil");
+		e.setNumero(50);
+		e.setComplemento("ssds");
+		
 		UsuarioUtil usuario = new UsuarioUtil();
-		System.out.println(usuario.criptografarSenha("senha"));
+		Usuario u = new Usuario();
+		u.setLogin("ana");
+		u.setSenha(usuario.criptografarSenha("teste"));
+		u.setPermissao(Papel.GERENTE);
+		
+		f.setEndereco(e);
+		
+		f.setUsuario(u);
+		
+		List<Funcionario> fs = new ArrayList<Funcionario>();
+		fs.add(f);
+		
+		d.setFuncionarios(fs);
+		
+		f.setDepartamento(d);
+		
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+		funcionarioDAO.salvar(f);
+
 		
 	}
 
