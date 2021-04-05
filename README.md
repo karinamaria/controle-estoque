@@ -3,7 +3,7 @@ Sistema de Controle de Estoque
 <!--ts-->
    * [Sobre](#Sobre)
    * [Como usar](#como-usar)
-      * [Pre Requisitos](#pre-requisitos)
+      * [Pre-Requisitos](#pre-requisitos)
       * [Clonar projeto](#clonar-projeto)
    * [Tecnologias](#tecnologias)
    * [Autoras](#Autoras)
