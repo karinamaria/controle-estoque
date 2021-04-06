@@ -1,7 +1,11 @@
 package br.ufrn.imd.controle;
 
 import java.io.IOException;
+import java.util.Date;
 
+import br.ufrn.imd.modelo.FormatoRegex;
+import br.ufrn.imd.modelo.Funcionario;
+import br.ufrn.imd.util.ValidaDados;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +65,37 @@ public class TelaCadastroFuncionarioController {
     @FXML
     void abrirTelaCadastroEndereco(ActionEvent event) {
     	
+    	boolean nome = ValidaDados.validarTextField(campoNome, labelErroNome, "Nome inválido", FormatoRegex.NOME);
+    	boolean dataNascimento = ValidaDados.validarDataPicker(campoDataNascimento, labelErroDataNascimento, "Selecione uma data");
+    	boolean sexo = ValidaDados.validarSelecao(rbFeminino, rbMasculino, labelErroSexo, "Selecione uma opção");
+    	boolean cpf = ValidaDados.validarTextField(campoCpf, labelErroCpf, "CPF inválido", FormatoRegex.CPF);
+    	boolean email = ValidaDados.validarTextField(campoEmail, labelErroEmail, "Email inválido", FormatoRegex.EMAIL);
+    	boolean telefone = ValidaDados.validarTextField(campoTelefone, labelErroTelefone, "Telefone inválido", FormatoRegex.TELEFONE);
+    	
+    	if (nome && dataNascimento && sexo && cpf && email && telefone) {
+    		Funcionario f = new Funcionario();
+    		
+    		f.setNome(campoNome.getText());
+    		Date data = new Date(campoDataNascimento.getValue().toEpochDay());
+    		if(rbFeminino.isSelected()) {
+    			f.setSexo("Feminino");
+    		}
+    		else {
+    			f.setSexo("Masculino");
+    		}
+    		f.setDataNascimento(data);
+    		f.setCpf(campoCpf.getText());
+    		f.setEmail(campoEmail.getText());
+    		f.setTelefone(campoTelefone.getText());
+    	
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/TelaCadastroEndereco.fxml"));
+		    	TelaCadastroEnderecoController.setFuncionario(f);
+				botaoContinuar.getScene().setRoot(root);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
     }
 
     @FXML

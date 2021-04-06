@@ -50,7 +50,7 @@
                </rowConstraints>
                <children>
                   <Label fx:id="labelErroNome" textFill="#ff4646" />
-                  <TextField fx:id="campoNome" GridPane.rowIndex="1" />
+                  <TextField fx:id="campoNome" promptText="Digite seu nome sem acentos..." GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane prefHeight="49.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -126,7 +126,7 @@
                </rowConstraints>
                <children>
                   <Label fx:id="labelErroEmail" textFill="#ff4646" />
-                  <TextField fx:id="campoEmail" GridPane.rowIndex="1" />
+                  <TextField fx:id="campoEmail" promptText="exemplo@gmail.com" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane layoutX="131.0" layoutY="184.0" prefHeight="49.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
