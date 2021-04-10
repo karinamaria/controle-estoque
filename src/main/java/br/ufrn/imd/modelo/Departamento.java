@@ -71,4 +71,7 @@ public class Departamento {
 		this.pedidos = pedidos;
 	}
 	
+	public String toString() {
+		return getNome();
+	}
 }

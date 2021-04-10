@@ -1,5 +1,6 @@
 package br.ufrn.imd.util;
 
+import br.ufrn.imd.modelo.Departamento;
 import br.ufrn.imd.modelo.FormatoRegex;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -44,5 +45,44 @@ public class ValidaDados {
 		
 		labelErro.setText(labelMensagem);
 		return umaOpcaoSelecionada;
+	}
+	
+	public static boolean validarSelecao(RadioButton opcao1, RadioButton opcao2, RadioButton opcao3, Label labelErro, String mensagemErro) {
+		boolean umaOpcaoSelecionada = true;
+		String labelMensagem = null;
+		
+		if(!(opcao1.isSelected() || opcao2.isSelected() || opcao3.isSelected())) {
+			labelMensagem = mensagemErro;
+			umaOpcaoSelecionada = false;
+		}
+		
+		labelErro.setText(labelMensagem);
+		return umaOpcaoSelecionada;
+	}
+	
+	public static boolean compararString(String texto1, String texto2, Label labelErro, String mensagemErro) {
+		boolean igual = true;
+		String labelMensagem = null;
+		
+		if(!texto1.equals(texto2)) {
+			labelMensagem = mensagemErro;
+			igual = false;
+		}
+		
+		labelErro.setText(labelMensagem);
+		return igual;
+	}
+	
+	public static boolean validarDepartamento(Departamento dep, Label labelErro, String mensagemErro) {
+		boolean naoNulo = true;
+		String labelMensagem = null;
+		
+		if(dep == null) {
+			labelMensagem = mensagemErro;
+			naoNulo = false;
+		}
+		
+		labelErro.setText(labelMensagem);
+		return naoNulo;
 	}
 }

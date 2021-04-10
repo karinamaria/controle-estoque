@@ -5,8 +5,8 @@ package br.ufrn.imd.modelo;
  *
  */
 public enum FormatoRegex {
-	NOME("[a-z A-Z]+"), CPF("\\b[0-9]{11}\\b"), EMAIL("[a-zA-Z0-9._%+-]+@gmail.com"), 
-	TELEFONE("\\b[0-9]{11}\\b"), CEP("\\b[0-9]{8}\\b");
+	NOME("[a-z A-Z À-ü]+"), CPF("\\b[0-9]{11}\\b"), EMAIL("[a-zA-Z0-9._%+-]+@gmail.com"), 
+	TELEFONE("\\b[0-9]{11}\\b"), CEP("\\b[0-9]{8}\\b"), NUMERO("\\b[0-9]+\\b"), USUARIO("[a-zA-Z0-9._%+-]+");
 	
 	private String formato;
 
