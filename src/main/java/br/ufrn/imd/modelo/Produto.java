@@ -30,7 +30,7 @@ public class Produto {
 	private String codigo;
 	
 	@Column(name="quantidade_estoque", columnDefinition = "int")
-	private int quantidadeNoEstoque;
+	private Integer quantidadeNoEstoque;
 	
 	@Column(name="preco_compra")
 	private double precoCompra;
@@ -68,11 +68,12 @@ public class Produto {
 		this.codigo = codigo;
 	}
 
-	public int getQuantidadeNoEstoque() {
+	
+	public Integer getQuantidadeNoEstoque() {
 		return quantidadeNoEstoque;
 	}
 
-	public void setQuantidadeNoEstoque(int quantidadeNoEstoque) {
+	public void setQuantidadeNoEstoque(Integer quantidadeNoEstoque) {
 		this.quantidadeNoEstoque = quantidadeNoEstoque;
 	}
 

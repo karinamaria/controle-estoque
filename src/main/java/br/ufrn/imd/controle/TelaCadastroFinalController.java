@@ -99,11 +99,10 @@ public class TelaCadastroFinalController implements Initializable {
     	boolean departamento = ValidaDados.validarDepartamento(cbDepartamentos.getValue(), labelErroDepartamento, "Selecione um departamento");
     	boolean usuario = ValidaDados.validarTextField(campoUsuario, labelErroUsuario, "Usuário inválido", FormatoRegex.USUARIO);
     	//Falta verificar se usuário já existe
-    	//Falta verificar se a senha é válida
+    	boolean senha = ValidaDados.validarString(campoSenha.getText(), labelErroSenha, "Digite uma senha");
     	boolean senhaRepitida = ValidaDados.compararString(campoRepitaSenha.getText(), campoSenha.getText(), labelErroRepitaSenha, "Senhas não correspondem");
     	
-    	//if (funcao && departamento && usuario && senha && senhaRepitida) {
-    	if (funcao && departamento && usuario && senhaRepitida) {
+    	if (funcao && departamento && usuario && senha && senhaRepitida) {
     		Usuario user = new Usuario();
     		user.setLogin(campoUsuario.getText());
     		user.setSenha(campoSenha.getText());
