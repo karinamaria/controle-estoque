@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -66,7 +67,12 @@ public abstract class DAOFactory <T> {
 	@SuppressWarnings("unchecked")
 	List<T> buscarTodos(){
 		Query query = manager.createQuery("Select t from " + persistentClass.getSimpleName() + " t");
-		List<T> list = query.getResultList();
+		List<T> list = null;
+		try {
+			list = query.getResultList();
+		}catch(NoResultException nre) {
+			list = null;
+		}
 		return list;
 	}
 	
@@ -76,11 +82,16 @@ public abstract class DAOFactory <T> {
 	 * @return entidade que refere-se ao id buscado
 	 */
 	@SuppressWarnings("unchecked")
-	T buscarPorId(Integer id) {
+	T buscarPorId(Integer id){
 		Query query = manager.createQuery("Select t from " + persistentClass.getSimpleName() + " t where t.id = :value1")
 					.setParameter("value1", id);
-		
-		return (T) query.getSingleResult();
+		T entidade = null;
+		try{
+			entidade = (T) query.getSingleResult();
+		}catch(NoResultException nre) {
+			entidade = null;
+		}
+		return entidade;
 	}
 	
 	/**
@@ -89,9 +100,16 @@ public abstract class DAOFactory <T> {
 	 * @return a entidade com base nos parâmetros buscados
 	 */
 	@SuppressWarnings("unchecked")
-	T buscarEntidadePorCampo(String queryPesquisa) {
+	T buscarEntidadePorCampo(String queryPesquisa){
 		Query query = manager.createQuery(queryPesquisa);
-		return (T) query.getSingleResult();
+		T entidade = null;
+		try{
+			entidade = (T) query.getSingleResult();
+		}catch(NoResultException nre) {
+			entidade = null;
+		}
+		
+		return entidade;
 	}
 	
 	/**
@@ -102,7 +120,12 @@ public abstract class DAOFactory <T> {
 	@SuppressWarnings("unchecked")
 	List<T> buscarEntidadesPorCampos(String queryPesquisa){
 		Query query = manager.createQuery(queryPesquisa);
-		List<T> list = query.getResultList();
+		List<T> list = null;
+		try {
+			list = query.getResultList();
+		}catch(NoResultException nre) {
+			list = null;
+		}
 		return list;
 	}
 }

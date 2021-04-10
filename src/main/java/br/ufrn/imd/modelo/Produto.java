@@ -26,7 +26,7 @@ public class Produto {
 	@Column(name="nome", columnDefinition = "character varying(255) default ''")
 	private String nome;
 	
-	@Column(name="codigo", columnDefinition = "character varying(20) default ''")
+	@Column(name="codigo", columnDefinition = "character varying(20) default ''", unique = true)
 	private String codigo;
 	
 	@Column(name="quantidade_estoque", columnDefinition = "int")

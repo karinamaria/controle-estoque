@@ -14,7 +14,7 @@ import br.ufrn.imd.modelo.Usuario;
  *
  */
 public class UsuarioUtil {
-	private UsuarioDAO usuarioDAO;
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 	
 	/**
 	 * Criptografar a senha de um usuário com o padrão MD5
@@ -43,15 +43,13 @@ public class UsuarioUtil {
 		Usuario aux = usuarioDAO.buscarUsuarioPorLogin(usuario.getLogin());
 		
 		if(aux == null) {
-			throw new NegocioException("Login inválido");
+			throw new NegocioException("Login inválido ou usuário não existe");
 		}else {
 			String senhaAuxiliar = criptografarSenha(usuario.getSenha());
 			
-			if(!usuario.getSenha().equals(senhaAuxiliar)) {
+			if(!aux.getSenha().equals(senhaAuxiliar)) {
 				throw new NegocioException("Senha inválida");
 			}
 		}
 	}
-	
-	
 }

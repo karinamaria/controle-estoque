@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @SequenceGenerator(name="SEQ_PESSOA", sequenceName="id_seq_fornecedor", allocationSize=1)
 public class Fornecedor extends Pessoa {
 	
-	@Column(name="cnpj", columnDefinition = "character varying(20) default ''")
+	@Column(name="cnpj", columnDefinition = "character varying(20) default ''", unique = true)
 	private String cnpj;
 	
 	@Column(name="site", columnDefinition = "character varying(100) default ''")

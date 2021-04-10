@@ -32,7 +32,7 @@ public class Pedido {
 	@Column(name="id_pedido")
 	private Integer id;
 	
-	@Column(name="numero_pedido", columnDefinition = "int")
+	@Column(name="numero_pedido", columnDefinition = "int", unique = true)
 	private int numeroPedido;
 	
 	@Column(name = "data_pedido", columnDefinition="DATE", nullable=true) 

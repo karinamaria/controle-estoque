@@ -24,7 +24,7 @@ public abstract class Pessoa {
 	@Column(name="nome", columnDefinition = "character varying(255) default ''")
 	private String nome;
 	
-	@Column(name="email", columnDefinition = "character varying(100) default ''")
+	@Column(name="email", columnDefinition = "character varying(100) default ''", unique = true)
 	private String email;
 	
 	@Column(name="telefone", columnDefinition = "character varying(20) default ''")
