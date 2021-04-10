@@ -14,7 +14,7 @@ import br.ufrn.imd.modelo.Usuario;
  *
  */
 public class UsuarioUtil {
-	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private static UsuarioDAO usuarioDAO = new UsuarioDAO();
 	
 	/**
 	 * Criptografar a senha de um usuário com o padrão MD5
@@ -51,5 +51,16 @@ public class UsuarioUtil {
 				throw new NegocioException("Senha inválida");
 			}
 		}
+	}
+	
+	/**
+	 * Validar se existe algum funcionario com o login informado
+	 * @param login que está sendo criado
+	 * @return true se existe o usuário; false, caso contrário
+	 */
+	public boolean validarExistenciaLogin(String login) {
+		Usuario aux = usuarioDAO.buscarUsuarioPorLogin(login);
+		
+		return aux != null;
 	}
 }

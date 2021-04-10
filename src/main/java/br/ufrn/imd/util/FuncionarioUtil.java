@@ -14,7 +14,7 @@ import br.ufrn.imd.modelo.Funcionario;
  *
  */
 public class FuncionarioUtil {
-	private FuncionarioDAO funcionarioDAO;
+	private static FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
 	public void validarFuncionario(Funcionario funcionario) throws NegocioException {
 		validarPreenchimentoCamposFuncionario(funcionario);

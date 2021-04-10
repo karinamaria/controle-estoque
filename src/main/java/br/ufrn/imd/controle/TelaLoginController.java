@@ -17,7 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class TelaLoginController {
-	private static Usuario usuario;
+	private static Usuario usuario = new Usuario();
 	
     @FXML
     private TextField campoUsuario;
@@ -34,12 +34,8 @@ public class TelaLoginController {
     @FXML
     private Label labelErro;
     
-    private UsuarioUtil usuarioUtil;
-    
-    public TelaLoginController() {
-    	usuario = new Usuario();
-    	usuarioUtil = new UsuarioUtil();
-    }
+    private static UsuarioUtil usuarioUtil = new UsuarioUtil();
+   
     
     @FXML
     void abrirTelaCadastroUsuario(ActionEvent event) throws IOException {
