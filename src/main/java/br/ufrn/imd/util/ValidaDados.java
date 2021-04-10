@@ -2,6 +2,7 @@ package br.ufrn.imd.util;
 
 import br.ufrn.imd.modelo.Departamento;
 import br.ufrn.imd.modelo.FormatoRegex;
+import br.ufrn.imd.modelo.Produto;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -97,5 +98,18 @@ public class ValidaDados {
 		
 		labelErro.setText(labelMensagem);
 		return naoNula;
+	}
+	
+	public static boolean validarProduto(Produto p, Label labelErro, String mensagemErro) {
+		boolean naoNulo = true;
+		String labelMensagem = null;
+		
+		if(p == null) {
+			labelMensagem = mensagemErro;
+			naoNulo = false;
+		}
+		
+		labelErro.setText(labelMensagem);
+		return naoNulo;
 	}
 }

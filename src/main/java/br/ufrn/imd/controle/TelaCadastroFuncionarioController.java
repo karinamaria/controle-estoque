@@ -1,6 +1,7 @@
 package br.ufrn.imd.controle;
 
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.Date;
 
 import br.ufrn.imd.modelo.FormatoRegex;
@@ -74,16 +75,17 @@ public class TelaCadastroFuncionarioController {
     	
     	if (nome && dataNascimento && sexo && cpf && email && telefone) {
     		Funcionario f = new Funcionario();
-    		
     		f.setNome(campoNome.getText());
-    		Date data = new Date(campoDataNascimento.getValue().toEpochDay());
+    		
+    		Date data = Date.from(campoDataNascimento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    		f.setDataNascimento(data);
+    		 
     		if(rbFeminino.isSelected()) {
     			f.setSexo("Feminino");
     		}
     		else {
     			f.setSexo("Masculino");
     		}
-    		f.setDataNascimento(data);
     		f.setCpf(campoCpf.getText());
     		f.setEmail(campoEmail.getText());
     		f.setTelefone(campoTelefone.getText());

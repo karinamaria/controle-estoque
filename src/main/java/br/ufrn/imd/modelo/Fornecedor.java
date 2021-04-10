@@ -22,7 +22,7 @@ public class Fornecedor extends Pessoa {
 	private String site;
 	
 	@Column(name="inscricao_estadual", columnDefinition = "character varying(20) default ''")
-	private String inscricaoEstatudal;
+	private String inscricaoEstadual;
 	
 	@Column(name="area_atuacao", columnDefinition = "character varying(100) default ''")
 	private String areaAtuacao;
@@ -47,12 +47,12 @@ public class Fornecedor extends Pessoa {
 		this.site = site;
 	}
 
-	public String getInscricaoEstatudal() {
-		return inscricaoEstatudal;
+	public String getInscricaoEstadual() {
+		return inscricaoEstadual;
 	}
 
-	public void setInscricaoEstatudal(String inscricaoEstatudal) {
-		this.inscricaoEstatudal = inscricaoEstatudal;
+	public void setInscricaoEstadual(String inscricaoEstadual) {
+		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
 	public String getAreaAtuacao() {
