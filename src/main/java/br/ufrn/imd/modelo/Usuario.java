@@ -24,7 +24,7 @@ public class Usuario{
 	@Column(name="id_usuario")
 	private Integer id;
 	
-	@Column(name="login", columnDefinition = "character varying(100) default ''")
+	@Column(name="login", columnDefinition = "character varying(100) default ''", unique = true)
 	private String login;
 	
 	@Column(name="senha", columnDefinition = "character varying(100) default ''")

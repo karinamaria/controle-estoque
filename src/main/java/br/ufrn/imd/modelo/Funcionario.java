@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 @SequenceGenerator(name="SEQ_FUNCIONARIO", sequenceName="id_seq_funcionario", allocationSize=1)
 public class Funcionario extends Pessoa {
 	
-	@Column(name="cpf", columnDefinition = "character varying(20) default ''")
+	@Column(name="cpf", columnDefinition = "character varying(20) default ''", unique = true)
 	private String cpf;
 	
 	@Column(name = "data_nascimento", columnDefinition="DATE", nullable=true) 
