@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.dao.ProdutoDAO;
 import br.ufrn.imd.modelo.Produto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class TelaGerenteController implements Initializable {
+	private static ProdutoDAO produtoDAO = new ProdutoDAO();
+	
 	@FXML
     private TableView<Produto> tabelaProdutos;
 
@@ -41,38 +44,37 @@ public class TelaGerenteController implements Initializable {
     
     private ObservableList<Produto> obsProdutos;
     
-    private List<Produto> produtos = new ArrayList<>(); //apenas para teste
+    private List<Produto> produtos = new ArrayList<Produto>(); //apenas para teste
     
-    @Override
-	public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-    	colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-    	colunaCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-    	colunaQtdEstoque.setCellValueFactory(new PropertyValueFactory<>("quantidadeNoEstoque"));
-    	colunaPrecoCompra.setCellValueFactory(new PropertyValueFactory<>("precoCompra"));
-    	colunaPrecoVenda.setCellValueFactory(new PropertyValueFactory<>("precoVenda"));
+    	colunaNome.setCellValueFactory(new PropertyValueFactory<Produto, String>("nome"));
+    	colunaCodigo.setCellValueFactory(new PropertyValueFactory<Produto, String>("codigo"));
+    	colunaQtdEstoque.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("quantidadeNoEstoque"));
+    	colunaPrecoCompra.setCellValueFactory(new PropertyValueFactory<Produto, Double>("precoCompra"));
+    	colunaPrecoVenda.setCellValueFactory(new PropertyValueFactory<Produto, Double>("precoVenda"));
     	
 		carregarProdutos();
 	}
     
     public void carregarProdutos() {
-    	//Teste
-    	Produto produto1 = new Produto();
-    	produto1.setNome("Produto 1");
-    	produto1.setCodigo("COD01");
-    	produto1.setQuantidadeNoEstoque(10);
-    	produto1.setPrecoCompra(6.13);
-    	produto1.setPrecoVenda(7);
-    	produtos.add(produto1);
-    	Produto produto2 = new Produto();
-    	produto2.setNome("Produto 2");
-    	produto2.setCodigo("COD02");
-    	produto2.setQuantidadeNoEstoque(17);
-    	produto2.setPrecoCompra(3.93);
-    	produto2.setPrecoVenda(9);
-    	produtos.add(produto2);
-    	//
-    	
+//    	//Teste
+//    	Produto produto1 = new Produto();
+//    	produto1.setNome("Produto 1");
+//    	produto1.setCodigo("COD01");
+//    	produto1.setQuantidadeNoEstoque(10);
+//    	produto1.setPrecoCompra(6.13);
+//    	produto1.setPrecoVenda(7);
+//    	produtos.add(produto1);
+//    	Produto produto2 = new Produto();
+//    	produto2.setNome("Produto 2");
+//    	produto2.setCodigo("COD02");
+//    	produto2.setQuantidadeNoEstoque(17);
+//    	produto2.setPrecoCompra(3.93);
+//    	produto2.setPrecoVenda(9);
+//    	produtos.add(produto2);
+//    	//
+    	produtos = produtoDAO.findAll();
     	obsProdutos = FXCollections.observableArrayList(produtos);
     	tabelaProdutos.setItems(obsProdutos);
     }

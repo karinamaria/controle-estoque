@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import br.ufrn.imd.dao.UsuarioDAO;
 import br.ufrn.imd.exception.NegocioException;
 import br.ufrn.imd.modelo.Usuario;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  * Classe de validações da entidade Usuario
@@ -14,7 +16,7 @@ import br.ufrn.imd.modelo.Usuario;
  *
  */
 public class UsuarioUtil {
-	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private static UsuarioDAO usuarioDAO = new UsuarioDAO();
 	
 	/**
 	 * Criptografar a senha de um usuário com o padrão MD5
@@ -51,5 +53,33 @@ public class UsuarioUtil {
 				throw new NegocioException("Senha inválida");
 			}
 		}
+	}
+	
+	public boolean verificarLogin(TextField texto, Label labelErro) {
+		boolean retorno = true;
+		try {
+			if(texto.getText() == null) {
+				retorno = false;
+			}
+			validarExistenciaLogin(texto.getText());
+		}catch(NegocioException ne) {
+			retorno = false;
+			labelErro.setText(ne.getMessage());
+		}
+		return retorno;
+	}
+	
+	/**
+	 * Validar se existe algum funcionario com o login informado
+	 * @param login que está sendo criado
+	 * @return true se existe o usuário; false, caso contrário
+	 * @throws NegocioException 
+	 */
+	private boolean validarExistenciaLogin(String login) throws NegocioException {
+		Usuario aux = usuarioDAO.buscarUsuarioPorLogin(login);
+		if(aux != null) {
+			throw new NegocioException("Login já existe");
+		}
+		return aux != null;
 	}
 }

@@ -1,11 +1,11 @@
 package br.ufrn.imd.util;
 
 import java.util.InputMismatchException;
-import java.util.Objects;
 
 import br.ufrn.imd.dao.FuncionarioDAO;
 import br.ufrn.imd.exception.NegocioException;
-import br.ufrn.imd.modelo.Funcionario;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  * Classe de validações da entidade Funcionário
@@ -14,40 +14,25 @@ import br.ufrn.imd.modelo.Funcionario;
  *
  */
 public class FuncionarioUtil {
-	private FuncionarioDAO funcionarioDAO;
+	private static FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
-	public void validarFuncionario(Funcionario funcionario) throws NegocioException {
-		validarPreenchimentoCamposFuncionario(funcionario);
-		validarLoginUsuario(funcionario);
-
-	}
 	/**
-	 * Validar se login já existe no banco de dados
-	 * @param f funcionário que terá o login validado
-	 * @throws NegocioException
+	 * Validar cpf de um funcionario
+	 * @param cpf cpf do funcionário
+	 * @param labelErro campo que receberá aviso de erro	
+	 * @return true - cpf é válido; false - se cpf é inválido
 	 */
-	public void validarLoginUsuario(Funcionario f) throws NegocioException {
-		// validar login de usuário
-		Funcionario aux = funcionarioDAO.buscarFuncionarioPorLogin(f.getUsuario().getLogin());
-		if (Objects.nonNull(aux)) {
-			if (!f.getCpf().equals(aux.getCpf())) {
-				throw new NegocioException("Login já pertece a outro usuário");
-			}
+	public boolean verificarTextFieldCpf(TextField cpf, Label labelErro) {
+		boolean retorno = true;
+		try {
+			validarCPFFuncionario(cpf.getText());
+		}catch(NegocioException ne) {
+			retorno = false;
+			labelErro.setText(ne.getMessage());
+		}catch(NullPointerException e) {
+			retorno=false;
 		}
-	}
-	
-	/**
-	 * Validação geral do campos da entidade funcionário
-	 * @param funcionario que terá seus campos validados
-	 * @throws NegocioException
-	 */
-	public void validarPreenchimentoCamposFuncionario(Funcionario funcionario) throws NegocioException {
-		if (!validarCPFFuncionario(funcionario.getCpf())) {
-			throw new NegocioException("CPF inválido");
-		}
-		if(funcionario.getSalario() < 0) {
-			throw new NegocioException("Sálario inválido");
-		}
+		return retorno;
 	}
 
 	/**
@@ -55,14 +40,18 @@ public class FuncionarioUtil {
 	 * 
 	 * @param cpf informado pelo funcionário
 	 * @return variável booleana que indica se o CPF é válido ou não
+	 * @throws NegocioException 
 	 */
-	public boolean validarCPFFuncionario(String cpf) {
+	private boolean validarCPFFuncionario(String cpf) throws NegocioException {
+		boolean retorno = true;
 		// considera-se erro CPF's formados por uma sequencia de numeros iguais
 		if (cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222")
 				|| cpf.equals("33333333333") || cpf.equals("44444444444") || cpf.equals("55555555555")
 				|| cpf.equals("66666666666") || cpf.equals("77777777777") || cpf.equals("88888888888")
-				|| cpf.equals("99999999999") || (cpf.length() != 11))
-			return (false);
+				|| cpf.equals("99999999999") || (cpf.length() != 11)) {
+			retorno=false;
+			throw new NegocioException("Por favor, informe um CPF válido");
+		}
 
 		char dig10, dig11;
 		int sm, i, r, num, peso;
@@ -103,12 +92,38 @@ public class FuncionarioUtil {
 				dig11 = (char) (r + 48);
 
 			// Verifica se os digitos calculados conferem com os digitos informados.
-			if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10)))
-				return (true);
-			else
-				return (false);
+			if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10))) {
+				retorno = true;
+			}else {
+				retorno=false;
+				throw new NegocioException("Por favor, informe um CPF válido");
+			}
 		} catch (InputMismatchException erro) {
-			return (false);
+			retorno=false;
+			throw new NegocioException("Por favor, informe um CPF válido");
+		}
+		return retorno;
+	}
+	
+	
+	public boolean verificarTextFieldEmail(TextField email, Label labelErro) {
+		boolean retorno = true;
+		
+		try {
+			validarEmail(email.getText());
+		}catch(NegocioException ne) {
+			retorno=false;
+			labelErro.setText(ne.getMessage());
+		}catch(NullPointerException e) {
+			retorno=false;
+		}
+	
+		return retorno;
+	}
+	
+	private void validarEmail(String email) throws NegocioException {
+		if(funcionarioDAO.buscarFuncionarioPorEmail(email) != null) {
+			throw new NegocioException("Email já pertence a outro funcionário");
 		}
 	}
 	

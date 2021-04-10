@@ -6,6 +6,7 @@ import java.util.Date;
 
 import br.ufrn.imd.modelo.FormatoRegex;
 import br.ufrn.imd.modelo.Funcionario;
+import br.ufrn.imd.util.FuncionarioUtil;
 import br.ufrn.imd.util.ValidaDados;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 public class TelaCadastroFuncionarioController {
+	private static FuncionarioUtil funcionarioUtil = new FuncionarioUtil();
+	
 	@FXML
     private Button botaoContinuar;
 
@@ -72,7 +75,8 @@ public class TelaCadastroFuncionarioController {
     	boolean cpf = ValidaDados.validarTextField(campoCpf, labelErroCpf, "CPF inválido", FormatoRegex.CPF);
     	boolean email = ValidaDados.validarTextField(campoEmail, labelErroEmail, "Email inválido", FormatoRegex.EMAIL);
     	boolean telefone = ValidaDados.validarTextField(campoTelefone, labelErroTelefone, "Telefone inválido", FormatoRegex.TELEFONE);
-    	
+    	cpf = funcionarioUtil.verificarTextFieldCpf(campoCpf, labelErroCpf);
+    	email = funcionarioUtil.verificarTextFieldEmail(campoEmail, labelErroEmail);
     	if (nome && dataNascimento && sexo && cpf && email && telefone) {
     		Funcionario f = new Funcionario();
     		f.setNome(campoNome.getText());
