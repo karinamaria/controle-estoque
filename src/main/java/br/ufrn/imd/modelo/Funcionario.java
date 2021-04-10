@@ -29,7 +29,7 @@ public class Funcionario extends Pessoa {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	
-	@Column(name="sexo", columnDefinition = "character varying(2) default ''")
+	@Column(name="sexo", columnDefinition = "character varying(20) default ''")
 	private String sexo;
 	
 	@Column(name="salario")

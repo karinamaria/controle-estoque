@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import br.ufrn.imd.dao.UsuarioDAO;
 import br.ufrn.imd.exception.NegocioException;
 import br.ufrn.imd.modelo.Usuario;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 /**
  * Classe de validações da entidade Usuario
@@ -53,14 +55,31 @@ public class UsuarioUtil {
 		}
 	}
 	
+	public boolean verificarLogin(TextField texto, Label labelErro) {
+		boolean retorno = true;
+		try {
+			if(texto.getText() == null) {
+				retorno = false;
+			}
+			validarExistenciaLogin(texto.getText());
+		}catch(NegocioException ne) {
+			retorno = false;
+			labelErro.setText(ne.getMessage());
+		}
+		return retorno;
+	}
+	
 	/**
 	 * Validar se existe algum funcionario com o login informado
 	 * @param login que está sendo criado
 	 * @return true se existe o usuário; false, caso contrário
+	 * @throws NegocioException 
 	 */
-	public boolean validarExistenciaLogin(String login) {
+	private boolean validarExistenciaLogin(String login) throws NegocioException {
 		Usuario aux = usuarioDAO.buscarUsuarioPorLogin(login);
-		
+		if(aux != null) {
+			throw new NegocioException("Login já existe");
+		}
 		return aux != null;
 	}
 }

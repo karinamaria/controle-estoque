@@ -2,15 +2,19 @@ package br.ufrn.imd.controle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.dao.DepartamentoDAO;
+import br.ufrn.imd.dao.FuncionarioDAO;
 import br.ufrn.imd.modelo.Departamento;
 import br.ufrn.imd.modelo.FormatoRegex;
 import br.ufrn.imd.modelo.Funcionario;
 import br.ufrn.imd.modelo.Papel;
 import br.ufrn.imd.modelo.Usuario;
+import br.ufrn.imd.util.UsuarioUtil;
 import br.ufrn.imd.util.ValidaDados;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +32,12 @@ import javafx.fxml.Initializable;
 
 public class TelaCadastroFinalController implements Initializable {
 	private static Funcionario funcionario;
+	
+	private static FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+	
+	private static UsuarioUtil usuarioUtil = new UsuarioUtil();
+	
+	private static DepartamentoDAO departamentoDAO = new DepartamentoDAO();
 	
 	private ObservableList<Departamento> obsDepartamentos;
 	
@@ -81,11 +91,12 @@ public class TelaCadastroFinalController implements Initializable {
 	}
     
     public void carregarDepartamentos() {
-    	//Teste
-    	Departamento departamento1 = new Departamento();
-    	departamento1.setNome("Departamento Teste");
-    	departamentos.add(departamento1);  	
-    	//
+//    	//Teste
+//    	Departamento departamento1 = new Departamento();
+//    	departamento1.setNome("Departamento Teste");
+//    	departamentos.add(departamento1);  	
+//    	//
+    	departamentos = departamentoDAO.findAll();
 
     	obsDepartamentos = FXCollections.observableArrayList(departamentos);
     	cbDepartamentos.setItems(obsDepartamentos);
@@ -97,19 +108,21 @@ public class TelaCadastroFinalController implements Initializable {
     	boolean funcao = ValidaDados.validarSelecao(rbGerente, rbAuxiliarEstoque, rbChefeDepartamento, labelErroFuncao, "Selecione uma opção");
     	boolean departamento = ValidaDados.validarDepartamento(cbDepartamentos.getValue(), labelErroDepartamento, "Selecione um departamento");
     	boolean usuario = ValidaDados.validarTextField(campoUsuario, labelErroUsuario, "Usuário inválido", FormatoRegex.USUARIO);
+    	usuario = usuarioUtil.verificarLogin(campoUsuario, labelErroUsuario);
     	//Falta verificar se usuário já existe
     	boolean senha = ValidaDados.validarString(campoSenha.getText(), labelErroSenha, "Digite uma senha");
     	boolean senhaRepitida = ValidaDados.compararString(campoRepitaSenha.getText(), campoSenha.getText(), labelErroRepitaSenha, "Senhas não correspondem");
     	
     	if (funcao && departamento && usuario && senha && senhaRepitida) {
-    		Usuario user = new Usuario();
-    		user.setLogin(campoUsuario.getText());
-    		user.setSenha(campoSenha.getText());
-    		funcionario.setUsuario(user);
-    		
+    	
     		funcionario.setDepartamento(cbDepartamentos.getValue());
     	
 			try {
+				Usuario user = new Usuario();
+	    		user.setLogin(campoUsuario.getText());
+	    		user.setSenha(usuarioUtil.criptografarSenha(campoSenha.getText()));
+	    		funcionario.setUsuario(user);
+	    		
 				Parent root;
 		    	
 				if(rbGerente.isSelected()) {
@@ -126,9 +139,12 @@ public class TelaCadastroFinalController implements Initializable {
 				}
 				
 				//adicionar funcionário ao banco de dados
+				funcionarioDAO.save(funcionario);
 				
 				botaoCadastrar.getScene().setRoot(root);
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
     	}

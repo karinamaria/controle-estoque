@@ -26,7 +26,7 @@ public class Departamento {
 	@Column(name="id_departamento")
 	private Integer id;
 	
-	@Column(name="nome")
+	@Column(name="nome", unique=true)
 	private String nome;
 	
 	@OneToMany(mappedBy = "departamento", targetEntity = Funcionario.class, fetch = FetchType.LAZY)

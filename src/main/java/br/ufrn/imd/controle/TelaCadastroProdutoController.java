@@ -1,5 +1,6 @@
 package br.ufrn.imd.controle;
 
+import br.ufrn.imd.dao.ProdutoDAO;
 import br.ufrn.imd.modelo.Produto;
 import br.ufrn.imd.util.ProdutoUtil;
 import javafx.event.ActionEvent;
@@ -10,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class TelaCadastroProdutoController {
+	private static ProdutoDAO produtoDAO = new ProdutoDAO();
+	
 	@FXML
     private Button botaoCadastrar;
 
@@ -68,6 +71,7 @@ public class TelaCadastroProdutoController {
     		produto.setPrecoVenda(Double.parseDouble(preco));
     		
     		//adicionar produto ao banco de dados
+    		produtoDAO.save(produto);
     		
     		produtoStage.close();
     	}
