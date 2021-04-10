@@ -85,4 +85,17 @@ public class ValidaDados {
 		labelErro.setText(labelMensagem);
 		return naoNulo;
 	}
+
+	public static boolean validarString(String str, Label labelErro, String mensagemErro) {
+		boolean naoNula = true;
+		String labelMensagem = null;
+		
+		if(str.isEmpty()) {
+			labelMensagem = mensagemErro;
+			naoNula = false;
+		}
+		
+		labelErro.setText(labelMensagem);
+		return naoNula;
+	}
 }

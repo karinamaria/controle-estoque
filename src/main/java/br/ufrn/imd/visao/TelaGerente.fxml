@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controle.TelaGerenteController">
    <children>
-      <Label layoutX="286.0" layoutY="192.0" text="TelaGerente" />
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Cadastrar">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroProduto" text="Cadastrar produto" />
+                  <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroFornecedor" text="Cadastrar fornecedor" />
+                  <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroDepartamento" text="Cadastrar departamento" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Pedidos">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Realizar pedido" />
+                  <MenuItem mnemonicParsing="false" text="Visualizar pedidos" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Relatório" />
+        </menus>
+      </MenuBar>
+      <ScrollPane layoutX="25.0" layoutY="86.0" prefHeight="300.0" prefWidth="550.0">
+         <content>
+            <TableView fx:id="tabelaProdutos" prefHeight="300.0" prefWidth="550.0">
+              <columns>
+                <TableColumn fx:id="colunaCodigo" prefWidth="77.0" text="Código" />
+                <TableColumn fx:id="colunaNome" prefWidth="177.0" text="Nome" />
+                  <TableColumn fx:id="colunaQtdEstoque" prefWidth="81.0" text="Qtd. estoque" />
+                  <TableColumn fx:id="colunaPrecoCompra" prefWidth="101.0" text="Preço de compra" />
+                  <TableColumn fx:id="colunaPrecoVenda" prefWidth="98.0" text="Preço de venda" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
