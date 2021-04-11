@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.dao.ProdutoDAO;
 import br.ufrn.imd.modelo.ItemPedido;
 import br.ufrn.imd.modelo.Produto;
 import br.ufrn.imd.util.PedidoUtil;
@@ -19,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class TelaItemPedidoController implements Initializable {
+	private static ProdutoDAO produtoDAO = new ProdutoDAO();
+	
 	@FXML
     private ComboBox<Produto> cbProdutos;
 	
@@ -73,13 +76,7 @@ public class TelaItemPedidoController implements Initializable {
 	}
 	
 	public void carregarProdutos() {
-    	//Teste
-    	Produto produto1 = new Produto();
-    	produto1.setNome("Produto Teste");
-    	produto1.setPrecoCompra(7);
-    	produtos.add(produto1);  	
-    	//
-
+    	produtos = produtoDAO.findAll();
     	obsProdutos = FXCollections.observableArrayList(produtos);
     	cbProdutos.setItems(obsProdutos);
     }

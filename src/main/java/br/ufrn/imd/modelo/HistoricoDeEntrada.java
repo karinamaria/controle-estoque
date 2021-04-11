@@ -39,7 +39,7 @@ public class HistoricoDeEntrada {
 	@JoinColumn(name = "id_fornecedor", referencedColumnName = "id")
 	private Fornecedor fornecedor;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.PERSIST)
 	private List<ItemPedido> itensPedido;
 	
 	public HistoricoDeEntrada() {

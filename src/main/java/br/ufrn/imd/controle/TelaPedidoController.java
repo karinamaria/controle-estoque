@@ -7,10 +7,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.dao.FuncionarioDAO;
+import br.ufrn.imd.dao.PedidoDAO;
+import br.ufrn.imd.modelo.Funcionario;
 import br.ufrn.imd.modelo.ItemPedido;
 import br.ufrn.imd.modelo.Pedido;
 import br.ufrn.imd.modelo.Produto;
 import br.ufrn.imd.util.PedidoUtil;
+import br.ufrn.imd.util.UsuarioUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +31,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class TelaPedidoController implements Initializable {
+	private static FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+	private static PedidoDAO pedidoDAO = new PedidoDAO();
+	
     @FXML
     private Label labelErroItens;
 
@@ -95,16 +102,20 @@ public class TelaPedidoController implements Initializable {
     		Date dataAtual = new Date();
     		
     		//falta definir número do pedido
+    		pedido.setNumeroPedido(PedidoUtil.gerarNumeroPedido());
     		pedido.setDataPedido(dataAtual);
     		pedido.setItensPedido(itens);
     		pedido.setDescricao(campoDescricao.getText());
     		pedido.setMotivo(campoMotivo.getText());
-    		pedido.setPedidoRealizado(true);		
+    		pedido.setPedidoRealizado(false);
+    		pedido.setPedidoFinalizado(false);
     		//definir departamento
-    		//pedido.setDepartamento(null);
+    		Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorLogin(UsuarioUtil.getUsuarioLogado().getLogin());
+    		
+    		pedido.setDepartamento(funcionario.getDepartamento());
     		
     		//salvar pedido no banco de dados
-    		
+    		pedidoDAO.save(pedido);
     		
     		pedidoStage.close();
     	}

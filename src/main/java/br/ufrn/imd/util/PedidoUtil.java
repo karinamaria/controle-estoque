@@ -1,7 +1,9 @@
 package br.ufrn.imd.util;
 
 import java.util.List;
+import java.util.Random;
 
+import br.ufrn.imd.dao.PedidoDAO;
 import br.ufrn.imd.modelo.FormatoRegex;
 import br.ufrn.imd.modelo.Fornecedor;
 import br.ufrn.imd.modelo.ItemPedido;
@@ -15,6 +17,7 @@ import javafx.scene.control.Label;
  *
  */
 public class PedidoUtil {
+	private static PedidoDAO pedidoDAO = new PedidoDAO();
 	public static boolean validarQuantidade(String qtd, Label labelErro) {
 		boolean ehValida = true;
 		String labelMensagem = null;
@@ -82,5 +85,16 @@ public class PedidoUtil {
 		
 		labelErro.setText(labelMensagem);
 		return naoNulo;
+	}
+	
+	public static int gerarNumeroPedido() {
+		Random gerador = new Random();
+		int gerarNumero = 0;
+		
+		do {
+			gerarNumero = gerador.nextInt();
+		}while(pedidoDAO.FindByNumero(gerarNumero) != null && gerarNumero < 0);
+		
+		return gerarNumero;
 	}
 }

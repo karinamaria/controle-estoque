@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.dao.FornecedorDAO;
 import br.ufrn.imd.modelo.Fornecedor;
 import br.ufrn.imd.modelo.HistoricoDeEntrada;
 import br.ufrn.imd.modelo.ItemPedido;
@@ -28,6 +29,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class TelaRegistroEntradaController implements Initializable {
+	private static FornecedorDAO fornecedorDAO = new FornecedorDAO();
+	
+	private static HistoricoEntradaObserver historicoObserver = new HistoricoEntradaObserver();
+	
 	@FXML
     private Label labelErroItens;
 
@@ -95,7 +100,7 @@ public class TelaRegistroEntradaController implements Initializable {
     		entradaProdutos.setDataOperacao(new Date());
     		
     		//adicionar `entradaProdutos` ao banco de dados
-    		
+    		historicoObserver.update(entradaProdutos);
     		
     		registroEntradaStage.close();
     	}
@@ -115,11 +120,7 @@ public class TelaRegistroEntradaController implements Initializable {
 	}
 
 	private void carregarFornecedores() {
-		//Teste
-		Fornecedor f = new Fornecedor();
-		f.setNome("Fornecedor Teste");
-		fornecedores.add(f);
-		//
+		fornecedores = fornecedorDAO.findAll();
 		obsFornecedores = FXCollections.observableArrayList(fornecedores);
 		cbFornecedores.setItems(obsFornecedores);
 	}

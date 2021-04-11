@@ -1,5 +1,6 @@
 package br.ufrn.imd.controle;
 
+import br.ufrn.imd.dao.FornecedorDAO;
 import br.ufrn.imd.modelo.Endereco;
 import br.ufrn.imd.modelo.FormatoRegex;
 import br.ufrn.imd.modelo.Fornecedor;
@@ -11,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class TelaCadastroFornecedorController {
+	private static FornecedorDAO fornecedorDAO = new FornecedorDAO();
+	
 	@FXML
     private Label labelErroNome;
 
@@ -127,6 +130,7 @@ public class TelaCadastroFornecedorController {
     		fornecedor.setEndereco(end);
     	
     		//adicionar fornecedor ao banco de dados
+    		fornecedorDAO.save(fornecedor);
     		
 			fornecedorStage.close();
     	}

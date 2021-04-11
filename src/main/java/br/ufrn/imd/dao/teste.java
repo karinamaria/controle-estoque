@@ -16,7 +16,7 @@ public class teste{
 
 	public static void main(String[] args) {
 		Departamento d = new Departamento();
-		d.setNome("Manutenção");
+		d.setNome("Estoque");
 		
 		Funcionario f = new Funcionario();
 		f.setNome("Ana");

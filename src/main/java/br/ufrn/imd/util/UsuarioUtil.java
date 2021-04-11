@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
  */
 public class UsuarioUtil {
 	private static UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private static Usuario usuarioLogado = new Usuario();
 	
 	/**
 	 * Criptografar a senha de um usuário com o padrão MD5
@@ -52,10 +53,10 @@ public class UsuarioUtil {
 			if(!aux.getSenha().equals(senhaAuxiliar)) {
 				throw new NegocioException("Senha inválida");
 			}
-			else {
-				return aux;
-			}
 		}
+		
+		usuarioLogado = aux;
+		return aux;
 	}
 	
 	public boolean verificarLogin(TextField texto, Label labelErro) {
@@ -84,5 +85,12 @@ public class UsuarioUtil {
 			throw new NegocioException("Login já existe");
 		}
 		return aux != null;
+	}
+	/**
+	 * Ajuda a identificar o usuário logado
+	 * @return o usuário logado
+	 */
+	public static Usuario getUsuarioLogado() {
+		return usuarioLogado;
 	}
 }
