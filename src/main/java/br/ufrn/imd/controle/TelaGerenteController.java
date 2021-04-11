@@ -44,6 +44,7 @@ public class TelaGerenteController implements Initializable {
     
     private List<Produto> produtos = new ArrayList<Produto>();
     
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
     	colunaNome.setCellValueFactory(new PropertyValueFactory<Produto, String>("nome"));
@@ -111,21 +112,22 @@ public class TelaGerenteController implements Initializable {
     }
 	
 	@FXML
-    void realizarPedido(ActionEvent event) throws IOException {
+    void registrarEntradaProdutos(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-    	loader.setLocation(TelaCadastroFornecedorController.class.getResource("/br/ufrn/imd/visao/TelaPedidoEstoque.fxml"));
+    	loader.setLocation(TelaRegistroEntradaController.class.getResource("/br/ufrn/imd/visao/TelaRegistroEntrada.fxml"));
     	AnchorPane page = (AnchorPane) loader.load();
     	
-    	Stage pedidoEstoqueStage = new Stage();
-    	pedidoEstoqueStage.setTitle("Realizar pedido");
-    	pedidoEstoqueStage.setResizable(false);
-    	pedidoEstoqueStage.setScene(new Scene(page));
+    	Stage registroEntradaStage = new Stage();
+    	registroEntradaStage.setTitle("Registro de entrada de produtos");
+    	registroEntradaStage.setResizable(false);
+    	registroEntradaStage.setScene(new Scene(page));
     	
-    	TelaPedidoEstoqueController controller = loader.getController();
-    	controller.setPedidoEstoqueStage(pedidoEstoqueStage);
-    	pedidoEstoqueStage.showAndWait();
+    	TelaRegistroEntradaController controller = loader.getController();
+    	controller.setRegistroEntradaStage(registroEntradaStage);
+    	registroEntradaStage.showAndWait();
     }
 	
+	@FXML
 	void sairDoSistema(ActionEvent event) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/TelaLogin.fxml"));
     	tabelaProdutos.getScene().setRoot(root);

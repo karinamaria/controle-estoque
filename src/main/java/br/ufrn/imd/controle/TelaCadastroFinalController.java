@@ -83,7 +83,7 @@ public class TelaCadastroFinalController implements Initializable {
     @FXML
     private PasswordField campoRepitaSenha;
     
-    private List<Departamento> departamentos = new ArrayList<Departamento>(); //apenas para testes
+    private List<Departamento> departamentos = new ArrayList<Departamento>();
     
     public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub

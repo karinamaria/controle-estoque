@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import br.ufrn.imd.modelo.Fornecedor;
 import br.ufrn.imd.modelo.ItemPedido;
 import br.ufrn.imd.modelo.Pedido;
 import br.ufrn.imd.modelo.Produto;
@@ -19,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,13 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class TelaPedidoEstoqueController implements Initializable {
-	@FXML
-    private Label labelErroFornecedor;
-
-    @FXML
-    private ComboBox<Fornecedor> cbFornecedores;
-
+public class TelaPedidoController implements Initializable {
     @FXML
     private Label labelErroItens;
 
@@ -48,9 +40,6 @@ public class TelaPedidoEstoqueController implements Initializable {
     private TableColumn<ItemPedido, Produto> colunaProduto;
 
     @FXML
-    private Label labelTotalPedido;
-
-    @FXML
     private Label labelErroDescricao;
 
     @FXML
@@ -62,17 +51,11 @@ public class TelaPedidoEstoqueController implements Initializable {
     @FXML
     private TextField campoMotivo;
 
-	private Stage pedidoEstoqueStage;
-	
-	private ObservableList<Fornecedor> obsFornecedores;
-    
-    private List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+	private Stage pedidoStage;
     
     private ObservableList<ItemPedido> obsItens;
     
     private List<ItemPedido> itens = new ArrayList<ItemPedido>();
-    
-    private double totalPedido = 0;
 
     @FXML
     void adicionarItemPedido(ActionEvent event) throws IOException {
@@ -92,27 +75,22 @@ public class TelaPedidoEstoqueController implements Initializable {
     	ItemPedido itemAux = controller.getItemPedido();
     	if(itemAux != null) {
     		itens.add(itemAux);
-    		
-    		totalPedido += itemAux.getQuantidade()*itemAux.getProduto().getPrecoCompra();
-    		labelTotalPedido.setText(String.valueOf(totalPedido));
-    		
     		carregarItens();
     	}
     }
 
     @FXML
     void cancelarPedido(ActionEvent event) {
-    	pedidoEstoqueStage.close();
+    	pedidoStage.close();
     }
 
     @FXML
     void realizarPedido(ActionEvent event) {
-    	boolean fornecedor = PedidoUtil.validarFornecedor(cbFornecedores.getValue(), labelErroFornecedor);
     	boolean listaItens = PedidoUtil.validarItens(itens, labelErroItens);
     	boolean descricao = PedidoUtil.validarTexto(campoDescricao.getText(), labelErroDescricao, "Digite uma descrição");
     	boolean motivo = PedidoUtil.validarTexto(campoMotivo.getText(), labelErroMotivo, "Digite um motivo");
     	
-    	if(fornecedor && listaItens && descricao && motivo) {
+    	if(listaItens && descricao && motivo) {
     		Pedido pedido = new Pedido();
     		Date dataAtual = new Date();
     		
@@ -121,18 +99,20 @@ public class TelaPedidoEstoqueController implements Initializable {
     		pedido.setItensPedido(itens);
     		pedido.setDescricao(campoDescricao.getText());
     		pedido.setMotivo(campoMotivo.getText());
-    		pedido.setValorTotal(totalPedido);
+    		pedido.setPedidoRealizado(true);		
+    		//definir departamento
+    		//pedido.setDepartamento(null);
     		
-    		//passar pedido e fornecedor, cbFornecedores.getValue(), para historico de entrada (?)
+    		//salvar pedido no banco de dados
     		
-    		pedido.setPedidoRealizado(true);
-    		pedidoEstoqueStage.close();
+    		
+    		pedidoStage.close();
     	}
     }
 
-	public void setPedidoEstoqueStage(Stage pedidoEstoqueStage) {
+	public void setPedidoStage(Stage pedidoStage) {
 		// TODO Auto-generated method stub
-		this.pedidoEstoqueStage = pedidoEstoqueStage;
+		this.pedidoStage = pedidoStage;
 	}
 
 	@Override
@@ -140,19 +120,6 @@ public class TelaPedidoEstoqueController implements Initializable {
 		// TODO Auto-generated method stub
 		colunaQuantidade.setCellValueFactory(new PropertyValueFactory<ItemPedido, Integer>("quantidade"));
 		colunaProduto.setCellValueFactory(new PropertyValueFactory<ItemPedido, Produto>("produto"));
-		
-		carregarFornecedores();
-	}
-	
-	public void carregarFornecedores() {
-		//Teste
-    	Fornecedor fornecedor1 = new Fornecedor();
-    	fornecedor1.setNome("Fornecedor Teste");
-    	fornecedores.add(fornecedor1);  	
-    	//
-
-    	obsFornecedores = FXCollections.observableArrayList(fornecedores);
-    	cbFornecedores.setItems(obsFornecedores);
 	}
 	
 	public void carregarItens() {

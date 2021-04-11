@@ -14,20 +14,23 @@
    <children>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Cadastrar">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroProduto" text="Cadastrar produto" />
-                  <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroFornecedor" text="Cadastrar fornecedor" />
-                  <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroDepartamento" text="Cadastrar departamento" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Pedidos">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
+            <Menu mnemonicParsing="false" text="Produto">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroProduto" text="Novo produto" />
+                  <MenuItem mnemonicParsing="false" onAction="#registrarEntradaProdutos" text="Registrar entrada" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Departamento">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroDepartamento" text="Novo departamento" />
                   <MenuItem mnemonicParsing="false" text="Visualizar pedidos" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Fornecedor">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroFornecedor" text="Novo fornecedor" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Relatório" />
             <Menu mnemonicParsing="false" text="Sair">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#sairDoSistema" text="Sair" />
@@ -39,9 +42,9 @@
          <content>
             <TableView fx:id="tabelaProdutos" prefHeight="300.0" prefWidth="550.0">
               <columns>
-                <TableColumn fx:id="colunaCodigo" prefWidth="92.0" text="Código" />
+                <TableColumn fx:id="colunaCodigo" prefWidth="90.0" text="Código" />
                 <TableColumn fx:id="colunaNome" prefWidth="260.0" text="Nome" />
-                  <TableColumn fx:id="colunaQtdEstoque" prefWidth="81.0" text="Qtd. estoque" />
+                  <TableColumn fx:id="colunaQtdEstoque" text="Qtd. estoque" />
                   <TableColumn fx:id="colunaPrecoCompra" prefWidth="100.0" text="Preço de compra" />
               </columns>
             </TableView>

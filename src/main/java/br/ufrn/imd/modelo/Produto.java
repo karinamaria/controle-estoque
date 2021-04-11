@@ -83,6 +83,6 @@ public class Produto {
 	}
 	
 	public String toString() {
-		return getNome() + " - R$ " + getPrecoCompra();
+		return getNome();
 	}
 }
