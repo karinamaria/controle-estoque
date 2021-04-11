@@ -13,7 +13,7 @@ public class PedidoDAO extends DAOFactory<Pedido> {
 	}
 	
 	public Pedido FindByNumero(int numero) {
-		String query = "Select p from Pedido p where p.numero='"+numero+"'";
+		String query = "Select p from Pedido p where p.numero="+numero;
 		return buscarEntidadePorCampo(query);
 	}
 }

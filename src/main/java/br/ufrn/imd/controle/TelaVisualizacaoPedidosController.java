@@ -1,30 +1,29 @@
 package br.ufrn.imd.controle;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.dao.PedidoDAO;
+import br.ufrn.imd.modelo.Departamento;
 import br.ufrn.imd.modelo.Pedido;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class TelaChefeDepartamentoController implements Initializable {
+public class TelaVisualizacaoPedidosController implements Initializable {
+	private static PedidoDAO pedidoDAO = new PedidoDAO();
+	
 	@FXML
-    private TableView<Pedido> tabelaHistorico;
+    private TableView<Pedido> tabelaPedidos;
 
     @FXML
     private TableColumn<Pedido, Date> colunaData;
@@ -33,36 +32,26 @@ public class TelaChefeDepartamentoController implements Initializable {
     private TableColumn<Pedido, Integer> colunaNumero;
 
     @FXML
+    private TableColumn<Pedido, Departamento> colunaDepartamento;
+
+    @FXML
     private TableColumn<Pedido, String> colunaDescricao;
 
     @FXML
     private TableColumn<Pedido, Boolean> colunaFinalizado;
-	
+    
     private ObservableList<Pedido> obsPedidos;
     
     private List<Pedido> pedidos = new ArrayList<Pedido>();
     
-	@FXML
-    void realizarPedido(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-    	loader.setLocation(TelaPedidoController.class.getResource("/br/ufrn/imd/visao/TelaPedido.fxml"));
-    	AnchorPane page = (AnchorPane) loader.load();
-    	
-    	Stage pedidoStage = new Stage();
-    	pedidoStage.setTitle("Realizar pedido");
-    	pedidoStage.setResizable(false);
-    	pedidoStage.setScene(new Scene(page));
-    	
-    	TelaPedidoController controller = loader.getController();
-    	controller.setPedidoStage(pedidoStage);
-    	pedidoStage.showAndWait();
-    }
+    private Stage visualizarPedidosStage;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		colunaData.setCellValueFactory(new PropertyValueFactory<Pedido, Date>("dataPedido"));
 		colunaNumero.setCellValueFactory(new PropertyValueFactory<Pedido, Integer>("numeroPedido"));
+		colunaDepartamento.setCellValueFactory(new PropertyValueFactory<Pedido, Departamento>("departamento"));
 		colunaDescricao.setCellValueFactory(new PropertyValueFactory<Pedido, String>("descricao"));
 		colunaFinalizado.setCellValueFactory(new PropertyValueFactory<Pedido, Boolean>("pedidoRealizado"));
 		
@@ -70,22 +59,25 @@ public class TelaChefeDepartamentoController implements Initializable {
 	}
 
 	private void carregarPedidos() {
-		Pedido p = new Pedido();
+		/*Pedido p = new Pedido();
 		p.setDataPedido(new Date());
 		p.setNumeroPedido(100);
 		p.setDescricao("Pedido teste");
 		p.setPedidoFinalizado(false);
-		pedidos.add(p);
+		pedidos.add(p);*/
 		
-		//carregar pedidos associados ao departamento do usuario
-		
+		//carregar todos os pedidos do banco de dados
+		pedidoDAO.findAll();
 		obsPedidos = FXCollections.observableArrayList(pedidos);
-		tabelaHistorico.setItems(obsPedidos);
+		tabelaPedidos.setItems(obsPedidos);
 	}
 	
 	@FXML
-    void sairDoSistema(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/TelaLogin.fxml"));
-    	tabelaHistorico.getScene().setRoot(root);
+    void fecharHistorico(ActionEvent event) {
+		visualizarPedidosStage.close();
     }
+
+	public void setVisualizarPedidosStage(Stage visualizarPedidosStage) {
+		this.visualizarPedidosStage = visualizarPedidosStage;
+	}
 }

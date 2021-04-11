@@ -60,6 +60,11 @@ public class TelaAuxiliarEstoqueController implements Initializable {
     	obsProdutos = FXCollections.observableArrayList(produtos);
     	tabelaProdutos.setItems(obsProdutos);
     }
+    
+    @FXML
+    void atualizarProdutos(ActionEvent event) {
+    	carregarProdutos();
+    }
 
     @FXML
     void abrirTelaCadastroProduto(ActionEvent event) throws IOException {
@@ -75,8 +80,6 @@ public class TelaAuxiliarEstoqueController implements Initializable {
     	TelaCadastroProdutoController controller = loader.getController();
     	controller.setProdutoStage(produtoStage);
     	produtoStage.showAndWait();
-    	
-    	carregarProdutos();
     }
 
     @FXML
@@ -93,6 +96,22 @@ public class TelaAuxiliarEstoqueController implements Initializable {
     	TelaRegistroEntradaController controller = loader.getController();
     	controller.setRegistroEntradaStage(registroEntradaStage);
     	registroEntradaStage.showAndWait();
+    }
+    
+    @FXML
+    void visualizarPedidos(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaVisualizacaoPedidosController.class.getResource("/br/ufrn/imd/visao/TelaVisualizacaoPedidos.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	Stage visualizarPedidoStage = new Stage();
+    	visualizarPedidoStage.setTitle("Histórico de pedidos");
+    	visualizarPedidoStage.setResizable(false);
+    	visualizarPedidoStage.setScene(new Scene(page));
+    	
+    	TelaVisualizacaoPedidosController controller = loader.getController();
+    	controller.setVisualizarPedidosStage(visualizarPedidoStage);
+    	visualizarPedidoStage.showAndWait();
     }
 
     @FXML
