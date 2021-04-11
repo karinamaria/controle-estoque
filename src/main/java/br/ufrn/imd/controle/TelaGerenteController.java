@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -38,9 +39,6 @@ public class TelaGerenteController implements Initializable {
 
     @FXML
     private TableColumn<Produto, Double> colunaPrecoCompra;
-
-    @FXML
-    private TableColumn<Produto, Double> colunaPrecoVenda;
     
     private ObservableList<Produto> obsProdutos;
     
@@ -52,7 +50,6 @@ public class TelaGerenteController implements Initializable {
     	colunaCodigo.setCellValueFactory(new PropertyValueFactory<Produto, String>("codigo"));
     	colunaQtdEstoque.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("quantidadeNoEstoque"));
     	colunaPrecoCompra.setCellValueFactory(new PropertyValueFactory<Produto, Double>("precoCompra"));
-    	colunaPrecoVenda.setCellValueFactory(new PropertyValueFactory<Produto, Double>("precoVenda"));
     	
 		carregarProdutos();
 	}
@@ -77,6 +74,8 @@ public class TelaGerenteController implements Initializable {
     	TelaCadastroProdutoController controller = loader.getController();
     	controller.setProdutoStage(produtoStage);
     	produtoStage.showAndWait();
+    	
+    	carregarProdutos();
     }
 	
 	@FXML
@@ -125,5 +124,10 @@ public class TelaGerenteController implements Initializable {
     	TelaPedidoEstoqueController controller = loader.getController();
     	controller.setPedidoEstoqueStage(pedidoEstoqueStage);
     	pedidoEstoqueStage.showAndWait();
+    }
+	
+	void sairDoSistema(ActionEvent event) throws IOException {
+    	Parent root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/TelaLogin.fxml"));
+    	tabelaProdutos.getScene().setRoot(root);
     }
 }
