@@ -12,4 +12,9 @@ public class HistoricoEntradaDAO extends DAOFactory<HistoricoDeEntrada> {
 	public List<HistoricoDeEntrada> findAll(){
 		return buscarTodos();
 	}
+	
+	public HistoricoDeEntrada FindByNumero(int numero) {
+		String query = "Select h from HistoricoDeEntrada h where h.numero="+numero;
+		return buscarEntidadePorCampo(query);
+	}
 }

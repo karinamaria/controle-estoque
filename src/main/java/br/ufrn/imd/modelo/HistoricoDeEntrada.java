@@ -31,6 +31,9 @@ public class HistoricoDeEntrada {
 	@Column(name="id_historico_entrada")
 	private Integer id;
 	
+	@Column(name="numero", columnDefinition = "int", unique = true)
+	private int numero;
+	
 	@Column(name = "data_operacao", columnDefinition="DATE", nullable=true) 
 	@Temporal(TemporalType.DATE)
 	private Date dataOperacao;
@@ -79,4 +82,13 @@ public class HistoricoDeEntrada {
 	public void setItensPedido(List<ItemPedido> itensPedido) {
 		this.itensPedido = itensPedido;
 	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+	
 }
