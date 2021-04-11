@@ -16,7 +16,6 @@
 		<class>br.ufrn.imd.modelo.ItemPedido</class>
 		<class>br.ufrn.imd.modelo.Pedido</class>
 		<class>br.ufrn.imd.modelo.HistoricoDeEntrada</class>
-		<class>br.ufrn.imd.modelo.HistoricoDeSaida</class>
 		
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->

@@ -1,15 +1,17 @@
 package br.ufrn.imd.modelo;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -33,11 +35,12 @@ public class HistoricoDeEntrada {
 	@Temporal(TemporalType.DATE)
 	private Date dataOperacao;
 	
-	@OneToMany
-	private List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_fornecedor", referencedColumnName = "id")
+	private Fornecedor fornecedor;
 	
 	@OneToMany
-	private List<Pedido> pedidos = new ArrayList<Pedido>();
+	private List<ItemPedido> itensPedido;
 	
 	public HistoricoDeEntrada() {
 		
@@ -61,19 +64,19 @@ public class HistoricoDeEntrada {
 		this.dataOperacao = dataOperacao;
 	}
 
-	public List<Fornecedor> getFornecedores() {
-		return fornecedores;
+	public Fornecedor getFornecedor() {
+		return fornecedor;
 	}
 
-	public void setFornecedores(List<Fornecedor> fornecedores) {
-		this.fornecedores = fornecedores;
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
+	public List<ItemPedido> getItensPedido() {
+		return itensPedido;
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public void setItensPedido(List<ItemPedido> itensPedido) {
+		this.itensPedido = itensPedido;
 	}
 }
