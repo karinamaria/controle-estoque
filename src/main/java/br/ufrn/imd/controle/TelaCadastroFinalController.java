@@ -91,11 +91,6 @@ public class TelaCadastroFinalController implements Initializable {
 	}
     
     public void carregarDepartamentos() {
-//    	//Teste
-//    	Departamento departamento1 = new Departamento();
-//    	departamento1.setNome("Departamento Teste");
-//    	departamentos.add(departamento1);  	
-//    	//
     	departamentos = departamentoDAO.findAll();
 
     	obsDepartamentos = FXCollections.observableArrayList(departamentos);
@@ -109,7 +104,6 @@ public class TelaCadastroFinalController implements Initializable {
     	boolean departamento = ValidaDados.validarDepartamento(cbDepartamentos.getValue(), labelErroDepartamento, "Selecione um departamento");
     	boolean usuario = ValidaDados.validarTextField(campoUsuario, labelErroUsuario, "Usuário inválido", FormatoRegex.USUARIO);
     	usuario = usuarioUtil.verificarLogin(campoUsuario, labelErroUsuario);
-    	//Falta verificar se usuário já existe
     	boolean senha = ValidaDados.validarString(campoSenha.getText(), labelErroSenha, "Digite uma senha");
     	boolean senhaRepitida = ValidaDados.compararString(campoRepitaSenha.getText(), campoSenha.getText(), labelErroRepitaSenha, "Senhas não correspondem");
     	

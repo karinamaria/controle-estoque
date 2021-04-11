@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 import br.ufrn.imd.exception.NegocioException;
+import br.ufrn.imd.modelo.Papel;
 import br.ufrn.imd.modelo.Usuario;
 import br.ufrn.imd.util.UsuarioUtil;
 import javafx.event.ActionEvent;
@@ -49,13 +50,27 @@ public class TelaLoginController {
     		usuario.setLogin(campoUsuario.getText());
     		usuario.setSenha(campoSenha.getText());
     		
-			usuarioUtil.validarAutenticacaoUsuario(usuario);
+			usuario = usuarioUtil.validarAutenticacaoUsuario(usuario);
 			//redirecionar para tela de acordo com login
+			Parent root;
+			if(usuario.getPermissao() == Papel.GERENTE) {			
+				root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/TelaGerente.fxml"));
+			}
+			else if(usuario.getPermissao() == Papel.AUXILIAR_ESTOQUE) {
+				root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/TelaAuxiliarEstoque.fxml"));
+			}
+			else {
+				root = FXMLLoader.load(getClass().getResource("/br/ufrn/imd/visao/TelaChefeDepartamento.fxml"));
+			}
+			botaoEntrar.getScene().setRoot(root);
+			
 		} catch (NoSuchAlgorithmException e) {
 			labelErro.setText("Erro ao fazer login. Tente novamente mais tarde.");
 			e.printStackTrace();
 		} catch (NegocioException e) {
 			labelErro.setText(e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
     }

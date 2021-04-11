@@ -44,7 +44,7 @@ public class TelaGerenteController implements Initializable {
     
     private ObservableList<Produto> obsProdutos;
     
-    private List<Produto> produtos = new ArrayList<Produto>(); //apenas para teste
+    private List<Produto> produtos = new ArrayList<Produto>();
     
     public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -58,22 +58,6 @@ public class TelaGerenteController implements Initializable {
 	}
     
     public void carregarProdutos() {
-//    	//Teste
-//    	Produto produto1 = new Produto();
-//    	produto1.setNome("Produto 1");
-//    	produto1.setCodigo("COD01");
-//    	produto1.setQuantidadeNoEstoque(10);
-//    	produto1.setPrecoCompra(6.13);
-//    	produto1.setPrecoVenda(7);
-//    	produtos.add(produto1);
-//    	Produto produto2 = new Produto();
-//    	produto2.setNome("Produto 2");
-//    	produto2.setCodigo("COD02");
-//    	produto2.setQuantidadeNoEstoque(17);
-//    	produto2.setPrecoCompra(3.93);
-//    	produto2.setPrecoVenda(9);
-//    	produtos.add(produto2);
-//    	//
     	produtos = produtoDAO.findAll();
     	obsProdutos = FXCollections.observableArrayList(produtos);
     	tabelaProdutos.setItems(obsProdutos);
@@ -125,5 +109,21 @@ public class TelaGerenteController implements Initializable {
     	TelaCadastroFornecedorController controller = loader.getController();
     	controller.setFornecedorStage(fornecedorStage);
     	fornecedorStage.showAndWait();
+    }
+	
+	@FXML
+    void realizarPedido(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaCadastroFornecedorController.class.getResource("/br/ufrn/imd/visao/TelaPedidoEstoque.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	Stage pedidoEstoqueStage = new Stage();
+    	pedidoEstoqueStage.setTitle("Realizar pedido");
+    	pedidoEstoqueStage.setResizable(false);
+    	pedidoEstoqueStage.setScene(new Scene(page));
+    	
+    	TelaPedidoEstoqueController controller = loader.getController();
+    	controller.setPedidoEstoqueStage(pedidoEstoqueStage);
+    	pedidoEstoqueStage.showAndWait();
     }
 }

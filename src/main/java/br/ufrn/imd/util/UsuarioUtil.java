@@ -41,7 +41,7 @@ public class UsuarioUtil {
 	 * @throws NegocioException
 	 * @throws NoSuchAlgorithmException
 	 */
-	public void validarAutenticacaoUsuario(Usuario usuario) throws NegocioException, NoSuchAlgorithmException {
+	public Usuario validarAutenticacaoUsuario(Usuario usuario) throws NegocioException, NoSuchAlgorithmException {
 		Usuario aux = usuarioDAO.buscarUsuarioPorLogin(usuario.getLogin());
 		
 		if(aux == null) {
@@ -51,6 +51,9 @@ public class UsuarioUtil {
 			
 			if(!aux.getSenha().equals(senhaAuxiliar)) {
 				throw new NegocioException("Senha inválida");
+			}
+			else {
+				return aux;
 			}
 		}
 	}

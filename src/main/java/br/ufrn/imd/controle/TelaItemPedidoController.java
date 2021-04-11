@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import br.ufrn.imd.modelo.FormatoRegex;
+import br.ufrn.imd.modelo.ItemPedido;
 import br.ufrn.imd.modelo.Produto;
-import br.ufrn.imd.util.ValidaDados;
+import br.ufrn.imd.util.PedidoUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,18 +36,25 @@ public class TelaItemPedidoController implements Initializable {
     private Stage itemPedidoStage;
     
     private List<Produto> produtos = new ArrayList<Produto>();
+    
+    private ItemPedido itemPedido;
 
     @FXML
     void adicionarItem(ActionEvent event) {
-    	boolean quantidade = ValidaDados.validarTextField(campoQuantidade, labelErroQuantidade, "Quantidade inválida", FormatoRegex.NUMERO);
-    	boolean produto = ValidaDados.validarProduto(cbProdutos.getValue(), labelErroProduto, "Selecione um produto");
+    	boolean quantidade = PedidoUtil.validarQuantidade(campoQuantidade.getText(), labelErroQuantidade);
+    	boolean produto = PedidoUtil.validarProduto(cbProdutos.getValue(), labelErroProduto);
     	
     	if(quantidade && produto) {
-    		
-    		//adicionar produto a lista de itens do pedido
+    		itemPedido = new ItemPedido();
+    		itemPedido.setProduto(cbProdutos.getValue());
+    		itemPedido.setQuantidade(Integer.parseInt(campoQuantidade.getText()));
     		
     		itemPedidoStage.close();
     	}
+    }
+    
+    public ItemPedido getItemPedido() {
+    	return itemPedido;
     }
 
     @FXML
@@ -69,6 +76,7 @@ public class TelaItemPedidoController implements Initializable {
     	//Teste
     	Produto produto1 = new Produto();
     	produto1.setNome("Produto Teste");
+    	produto1.setPrecoCompra(7);
     	produtos.add(produto1);  	
     	//
 

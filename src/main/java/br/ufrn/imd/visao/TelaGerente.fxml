@@ -21,7 +21,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Pedidos">
             <items>
-              <MenuItem mnemonicParsing="false" text="Realizar pedido" />
+              <MenuItem mnemonicParsing="false" onAction="#realizarPedido" text="Realizar pedido" />
                   <MenuItem mnemonicParsing="false" text="Visualizar pedidos" />
             </items>
           </Menu>

@@ -43,12 +43,6 @@ public class TelaCadastroProdutoController {
     @FXML
     private TextField campoPrecoCompra;
 
-    @FXML
-    private Label labelErroPrecoVenda;
-
-    @FXML
-    private TextField campoPrecoVenda;
-
 	private Stage produtoStage;
 
     @FXML
@@ -57,9 +51,8 @@ public class TelaCadastroProdutoController {
     	boolean codigo = ProdutoUtil.validarCodigo(campoCodigo.getText(), labelErroCodigo);
     	boolean qtdEstoque = ProdutoUtil.validarQuantidade(campoQtdEstoque.getText(), labelErroQtdEstoque);
     	boolean precoCompra = ProdutoUtil.validarPreco(campoPrecoCompra.getText(), labelErroPrecoCompra);
-    	boolean precoVenda = ProdutoUtil.validarPreco(campoPrecoVenda.getText(), labelErroPrecoVenda);
     	
-    	if (nome && codigo && qtdEstoque && precoCompra && precoVenda) {
+    	if (nome && codigo && qtdEstoque && precoCompra) {
     		Produto produto = new Produto();
     		produto.setNome(campoNome.getText());
     		produto.setCodigo(campoCodigo.getText());
@@ -67,8 +60,6 @@ public class TelaCadastroProdutoController {
     		
     		String preco = campoPrecoCompra.getText().replaceAll( "," , "." );
     		produto.setPrecoCompra(Double.parseDouble(preco));
-    		preco = campoPrecoVenda.getText().replaceAll( "," , "." );
-    		produto.setPrecoVenda(Double.parseDouble(preco));
     		
     		//adicionar produto ao banco de dados
     		produtoDAO.save(produto);

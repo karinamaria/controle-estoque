@@ -35,9 +35,6 @@ public class Produto {
 	@Column(name="preco_compra")
 	private double precoCompra;
 	
-	@Column(name="preco_venda")
-	private double precoVenda;
-	
 	public Produto() {
 		
 	}
@@ -84,12 +81,8 @@ public class Produto {
 	public void setPrecoCompra(double precoCompra) {
 		this.precoCompra = precoCompra;
 	}
-
-	public double getPrecoVenda() {
-		return precoVenda;
-	}
-
-	public void setPrecoVenda(double precoVenda) {
-		this.precoVenda = precoVenda;
+	
+	public String toString() {
+		return getNome() + " - R$ " + getPrecoCompra();
 	}
 }

@@ -24,6 +24,6 @@ public class Main extends Application {
 	
 	public Parent carregarTelaLogin() throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("TelaLogin.fxml"));
-        return root;
+		return root;
 	}
 }

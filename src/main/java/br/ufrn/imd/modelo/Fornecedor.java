@@ -63,4 +63,7 @@ public class Fornecedor extends Pessoa {
 		this.areaAtuacao = areaAtuacao;
 	}
 
+	public String toString() {
+		return getNome();
+	}
 }
