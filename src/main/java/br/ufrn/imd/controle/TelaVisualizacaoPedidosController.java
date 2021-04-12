@@ -53,20 +53,12 @@ public class TelaVisualizacaoPedidosController implements Initializable {
 		colunaNumero.setCellValueFactory(new PropertyValueFactory<Pedido, Integer>("numeroPedido"));
 		colunaDepartamento.setCellValueFactory(new PropertyValueFactory<Pedido, Departamento>("departamento"));
 		colunaDescricao.setCellValueFactory(new PropertyValueFactory<Pedido, String>("descricao"));
-		colunaFinalizado.setCellValueFactory(new PropertyValueFactory<Pedido, Boolean>("pedidoRealizado"));
+		colunaFinalizado.setCellValueFactory(new PropertyValueFactory<Pedido, Boolean>("pedidoFinalizado"));
 		
 		carregarPedidos();
 	}
 
 	private void carregarPedidos() {
-		/*Pedido p = new Pedido();
-		p.setDataPedido(new Date());
-		p.setNumeroPedido(100);
-		p.setDescricao("Pedido teste");
-		p.setPedidoFinalizado(false);
-		pedidos.add(p);*/
-		
-		//carregar todos os pedidos do banco de dados
 		pedidos = pedidoDAO.findAll();
 		obsPedidos = FXCollections.observableArrayList(pedidos);
 		tabelaPedidos.setItems(obsPedidos);

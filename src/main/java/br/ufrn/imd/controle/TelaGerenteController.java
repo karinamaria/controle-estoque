@@ -64,6 +64,7 @@ public class TelaGerenteController implements Initializable {
     @FXML
     void atualizarProdutos(ActionEvent event) {
     	carregarProdutos();
+    	tabelaProdutos.refresh();
     }
 	
 	@FXML

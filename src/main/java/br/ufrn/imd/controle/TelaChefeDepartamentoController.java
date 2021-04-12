@@ -65,6 +65,7 @@ public class TelaChefeDepartamentoController implements Initializable {
     	pedidoStage.showAndWait();
     	
     	carregarPedidos();
+    	tabelaHistorico.refresh();
     }
 
 	@Override
@@ -73,9 +74,10 @@ public class TelaChefeDepartamentoController implements Initializable {
 		colunaData.setCellValueFactory(new PropertyValueFactory<Pedido, Date>("dataPedido"));
 		colunaNumero.setCellValueFactory(new PropertyValueFactory<Pedido, Integer>("numeroPedido"));
 		colunaDescricao.setCellValueFactory(new PropertyValueFactory<Pedido, String>("descricao"));
-		colunaFinalizado.setCellValueFactory(new PropertyValueFactory<Pedido, Boolean>("pedidoRealizado"));
+		colunaFinalizado.setCellValueFactory(new PropertyValueFactory<Pedido, Boolean>("pedidoFinalizado"));
 		
 		carregarPedidos();
+		tabelaHistorico.refresh();
 	}
 
 	private void carregarPedidos() {		

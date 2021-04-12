@@ -64,6 +64,7 @@ public class TelaAuxiliarEstoqueController implements Initializable {
     @FXML
     void atualizarProdutos(ActionEvent event) {
     	carregarProdutos();
+    	tabelaProdutos.refresh();
     }
 
     @FXML
@@ -112,6 +113,22 @@ public class TelaAuxiliarEstoqueController implements Initializable {
     	TelaVisualizacaoPedidosController controller = loader.getController();
     	controller.setVisualizarPedidosStage(visualizarPedidoStage);
     	visualizarPedidoStage.showAndWait();
+    }
+    
+    @FXML
+    void visualizarHistoricoEntradas(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaVisualizarRegistroEntradaController.class.getResource("/br/ufrn/imd/visao/TelaVisualizarRegistroEntrada.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	Stage vrEntradaStage = new Stage();
+    	vrEntradaStage.setTitle("Histórico de entradas");
+    	vrEntradaStage.setResizable(false);
+    	vrEntradaStage.setScene(new Scene(page));
+    	
+    	TelaVisualizarRegistroEntradaController controller = loader.getController();
+    	controller.setVREntradaStage(vrEntradaStage);
+    	vrEntradaStage.showAndWait();
     }
 
     @FXML
