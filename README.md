@@ -12,7 +12,7 @@ Sistema de Controle de Estoque
 <!--te-->
 
 # Sobre
-O  objetivo do projeto é simular um sistema de controle de estoque. Para isso, o projeto foi construÃ­do a partir de conhecimentos anteriores, bem como, os conhecimentos adquiridos durante a disciplina Linguagem de Programação II (IMD/UFRN)
+O  objetivo do projeto é simular um sistema de controle de estoque. Para isso, o projeto foi construído a partir de conhecimentos anteriores, bem como, os conhecimentos adquiridos durante a disciplina Linguagem de Programação II (IMD/UFRN)
 
 # Como usar
   # Pre-requisitos
