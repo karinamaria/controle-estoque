@@ -19,7 +19,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#abrirTelaCadastroProduto" text="Novo produto" />
                   <MenuItem mnemonicParsing="false" onAction="#registrarEntradaProdutos" text="Registrar entrada" />
-                  <MenuItem mnemonicParsing="false" text="Registro de entradas" />
+                  <MenuItem mnemonicParsing="false" onAction="#visualizarHistoricoEntradas" text="Registro de entradas" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Departamento">
