@@ -7,7 +7,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.dao.FuncionarioDAO;
+import br.ufrn.imd.dao.PedidoDAO;
+import br.ufrn.imd.modelo.Funcionario;
 import br.ufrn.imd.modelo.Pedido;
+import br.ufrn.imd.util.UsuarioUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +27,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class TelaChefeDepartamentoController implements Initializable {
+	private static FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+	private static PedidoDAO pedidoDAO = new PedidoDAO();
+	
 	@FXML
     private TableView<Pedido> tabelaHistorico;
 
@@ -70,14 +77,17 @@ public class TelaChefeDepartamentoController implements Initializable {
 	}
 
 	private void carregarPedidos() {
-		Pedido p = new Pedido();
-		p.setDataPedido(new Date());
-		p.setNumeroPedido(100);
-		p.setDescricao("Pedido teste");
-		p.setPedidoFinalizado(false);
-		pedidos.add(p);
+//		Pedido p = new Pedido();
+//		p.setDataPedido(new Date());
+//		p.setNumeroPedido(100);
+//		p.setDescricao("Pedido teste");
+//		p.setPedidoFinalizado(false);
+//		pedidos.add(p);
 		
 		//carregar pedidos associados ao departamento do usuario
+		Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorLogin(UsuarioUtil.getUsuarioLogado().getLogin());
+		
+		pedidos = pedidoDAO.findPedidoByDepartamento(funcionario.getDepartamento().getId());
 		
 		obsPedidos = FXCollections.observableArrayList(pedidos);
 		tabelaHistorico.setItems(obsPedidos);

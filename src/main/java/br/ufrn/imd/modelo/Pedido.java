@@ -48,9 +48,9 @@ public class Pedido {
 	@Column(name="motivo", columnDefinition = "character varying(20) default ''")
 	private String motivo;
 
-	private boolean pedidoRealizado = false;;
+	private boolean pedidoRealizado = false;
 
-	private boolean pedidoFinalizado = false;;
+	private boolean pedidoFinalizado = false;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_departamento", referencedColumnName = "id_departamento")
