@@ -12,7 +12,7 @@ Sistema de Controle de Estoque
 <!--te-->
 
 # Sobre
-O  objetivo do projeto é simular um sistema de controle de estoque. Para isso, o projeto foi construído a partir de conhecimentos anteriores, bem como, os conhecimentos adquiridos durante a disciplina Linguagem de Programação II (IMD/UFRN)
+O  objetivo do projeto é simular um sistema de controle de estoque. Para isso, o projeto foi construÃ­do a partir de conhecimentos anteriores, bem como, os conhecimentos adquiridos durante a disciplina Linguagem de Programação II (IMD/UFRN)
 
 # Como usar
   # Pre-requisitos
@@ -26,13 +26,13 @@ O  objetivo do projeto é simular um sistema de controle de estoque. Para isso, 
   # Criar banco
   	  No PostgreSQL crie um banco chamado `controle-estoque`
   # Configurar Hibernate
-  	  1. No projeto clonado, v� at� o arquivo `persistence.xml` no caminho `src/main/resources/META-INF/persistence.xml`
-  	  2. V� ate as seguintes linhas
+  	  1. No projeto clonado, vá até o arquivo `persistence.xml` no caminho `src/main/resources/META-INF/persistence.xml`
+  	  2. Vá ate as seguintes linhas
   	  ```
   	   <property name="javax.persistence.jdbc.user" value="postgres" /> 
        <property name="javax.persistence.jdbc.password" value="root" />
       ```
-      E troque o valor das linhas para configura��o do seu banco de dados.
+      E troque o valor das linhas para configuração do seu banco de dados.
   	  
 # Tecnologias
 - Java (versão 14)
