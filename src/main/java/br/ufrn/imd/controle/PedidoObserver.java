@@ -73,6 +73,7 @@ public class PedidoObserver implements Observer<Pedido> {
 			}
 		}
 		p.setPedidoFinalizado(true);
+		update(p);
 
 	}
 
