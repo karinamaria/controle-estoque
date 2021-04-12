@@ -27,4 +27,5 @@ public class HistoricoEntradaDAO extends DAOFactory<HistoricoDeEntrada> {
 		}
 		return numeros;
 	}
+	
 }

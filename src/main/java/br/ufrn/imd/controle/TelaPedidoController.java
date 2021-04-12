@@ -33,6 +33,7 @@ import javafx.stage.Stage;
 public class TelaPedidoController implements Initializable {
 	private static FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 	private static PedidoDAO pedidoDAO = new PedidoDAO();
+	private static PedidoObserver pedidoObserver = new PedidoObserver();
 	
     @FXML
     private Label labelErroItens;
@@ -116,6 +117,7 @@ public class TelaPedidoController implements Initializable {
     		
     		//salvar pedido no banco de dados
     		pedidoDAO.save(pedido);
+    		pedidoObserver.analisarPedidos(pedido);
     		
     		pedidoStage.close();
     	}

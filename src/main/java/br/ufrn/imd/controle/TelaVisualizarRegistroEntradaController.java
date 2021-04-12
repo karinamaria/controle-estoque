@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrn.imd.dao.HistoricoEntradaDAO;
 import br.ufrn.imd.modelo.ItemPedido;
 import br.ufrn.imd.modelo.Produto;
 import javafx.collections.FXCollections;
@@ -20,6 +21,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class TelaVisualizarRegistroEntradaController implements Initializable {
+	private static HistoricoEntradaDAO historicoEntradaDAO = new HistoricoEntradaDAO();
+	
 	@FXML
     private ComboBox<Integer> cbNumerosHistorico;
 
@@ -58,8 +61,8 @@ public class TelaVisualizarRegistroEntradaController implements Initializable {
 	}
 	
 	private void carregarNumHistorico() {
-		numHistorico.add(1);
-		
+		//numHistorico.add(1);
+		numHistorico = historicoEntradaDAO.findNumerosHistorico();
 		obsNumHistorico = FXCollections.observableArrayList(numHistorico);
     	cbNumerosHistorico.setItems(obsNumHistorico);
 	}
@@ -70,15 +73,15 @@ public class TelaVisualizarRegistroEntradaController implements Initializable {
     }
 
 	@FXML
-    void cbSelecionado(ActionEvent event) {
-    	System.out.println("TESTE. Valor comboBox: " + cbNumerosHistorico.getValue());
-    	
+    void cbSelecionado(ActionEvent event) { 	
     	//pegar HistoricoDeEntrada que possui o número de cbNumerosHistorico.getValue()
     	
     	//definir
     	//labelFornecedor.setText();
     	//labelData.setText();
     	//setar itens
+    	itens = historicoEntradaDAO.FindByNumero(cbNumerosHistorico.getValue()).getItensPedido();
+    	
 		obsItens = FXCollections.observableArrayList(itens);
 		tabelaItens.setItems(obsItens);
     }
