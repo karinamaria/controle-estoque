@@ -7,6 +7,8 @@ Sistema de Controle de Estoque
       * [Clonar projeto](#clonar-projeto)
       * [Criar banco](#criar-banco)
       * [Configurar Hibernate](#configurar-hibernate)
+      * [Criar departamento](#criar-departamento)
+      * [Executar](#executar)
    * [Tecnologias](#tecnologias)
    * [Autoras](#Autoras)
 <!--te-->
@@ -33,6 +35,10 @@ O  objetivo do projeto é simular um sistema de controle de estoque. Para isso, 
        <property name="javax.persistence.jdbc.password" value="root" />
       ```
       E troque o valor das linhas para configuração do seu banco de dados.
+  # Criar departamento
+  É necessário criar o departamento "Estoque" na tabela "departamento" do banco de dados, pois consideramos que como o estoque é o departamento principal ele deve já vir cadastrado no banco de dados
+  # Executar
+  Para executar o projeto compile a classe `TelaPrincipal.java` localizada no pacote de visão.
   	  
 # Tecnologias
 - Java (versão 14)
