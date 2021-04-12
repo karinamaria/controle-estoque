@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controle.TelaVisualizarRegistroEntradaController">
+   <children>
+      <Label layoutX="78.0" layoutY="14.0" text="Registro de Entradas">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="64.0" text="Selecione um registro">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbNumerosHistorico" layoutX="154.0" layoutY="60.0" onAction="#cbSelecionado" prefHeight="25.0" prefWidth="170.0" />
+      <Label layoutX="22.0" layoutY="93.0" text="Fornecedor:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="116.0" text="Data:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="25.0" layoutY="136.0" prefHeight="250.0" prefWidth="300.0">
+         <content>
+            <TableView fx:id="tabelaItens" prefHeight="250.0" prefWidth="300.0">
+              <columns>
+                <TableColumn fx:id="colunaQuantidade" prefWidth="69.0" text="Qtd." />
+                <TableColumn fx:id="colunaProduto" prefWidth="216.0" text="Produto" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <Label fx:id="labelFornecedor" layoutX="97.0" layoutY="93.0" />
+      <Label fx:id="labelData" layoutX="56.0" layoutY="116.0" />
+      <Button layoutX="150.0" layoutY="402.0" mnemonicParsing="false" onAction="#fecharRegistro" text="Fechar" />
+   </children>
+</AnchorPane>

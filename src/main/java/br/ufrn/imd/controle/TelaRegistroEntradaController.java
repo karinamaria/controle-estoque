@@ -12,6 +12,7 @@ import br.ufrn.imd.modelo.Fornecedor;
 import br.ufrn.imd.modelo.HistoricoDeEntrada;
 import br.ufrn.imd.modelo.ItemPedido;
 import br.ufrn.imd.modelo.Produto;
+import br.ufrn.imd.util.HistoricoDeEntradaUtil;
 import br.ufrn.imd.util.PedidoUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,6 +99,7 @@ public class TelaRegistroEntradaController implements Initializable {
     		entradaProdutos.setFornecedor(cbFornecedores.getValue());
     		entradaProdutos.setItensPedido(itens);
     		entradaProdutos.setDataOperacao(new Date());
+    		entradaProdutos.setNumero(HistoricoDeEntradaUtil.gerarNumero());
     		
     		//adicionar `entradaProdutos` ao banco de dados
     		historicoObserver.update(entradaProdutos);
