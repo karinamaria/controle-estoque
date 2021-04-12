@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import br.ufrn.imd.dao.HistoricoEntradaDAO;
+import br.ufrn.imd.modelo.HistoricoDeEntrada;
 import br.ufrn.imd.modelo.ItemPedido;
 import br.ufrn.imd.modelo.Produto;
 import javafx.collections.FXCollections;
@@ -61,7 +62,6 @@ public class TelaVisualizarRegistroEntradaController implements Initializable {
 	}
 	
 	private void carregarNumHistorico() {
-		//numHistorico.add(1);
 		numHistorico = historicoEntradaDAO.findNumerosHistorico();
 		obsNumHistorico = FXCollections.observableArrayList(numHistorico);
     	cbNumerosHistorico.setItems(obsNumHistorico);
@@ -73,14 +73,12 @@ public class TelaVisualizarRegistroEntradaController implements Initializable {
     }
 
 	@FXML
-    void cbSelecionado(ActionEvent event) { 	
-    	//pegar HistoricoDeEntrada que possui o número de cbNumerosHistorico.getValue()
-    	
-    	//definir
-    	//labelFornecedor.setText();
-    	//labelData.setText();
-    	//setar itens
-    	itens = historicoEntradaDAO.FindByNumero(cbNumerosHistorico.getValue()).getItensPedido();
+    void cbSelecionado(ActionEvent event) { 
+		//itens = historicoEntradaDAO.FindByNumero(cbNumerosHistorico.getValue()).getItensPedido();
+		HistoricoDeEntrada aux = historicoEntradaDAO.FindByNumero(cbNumerosHistorico.getValue());
+		itens = aux.getItensPedido();
+    	labelFornecedor.setText(aux.getFornecedor().getNome());
+    	labelData.setText(aux.getDataOperacao().toString());
     	
 		obsItens = FXCollections.observableArrayList(itens);
 		tabelaItens.setItems(obsItens);

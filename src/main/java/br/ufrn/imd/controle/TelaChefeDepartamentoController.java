@@ -63,6 +63,8 @@ public class TelaChefeDepartamentoController implements Initializable {
     	TelaPedidoController controller = loader.getController();
     	controller.setPedidoStage(pedidoStage);
     	pedidoStage.showAndWait();
+    	
+    	carregarPedidos();
     }
 
 	@Override
@@ -76,14 +78,7 @@ public class TelaChefeDepartamentoController implements Initializable {
 		carregarPedidos();
 	}
 
-	private void carregarPedidos() {
-//		Pedido p = new Pedido();
-//		p.setDataPedido(new Date());
-//		p.setNumeroPedido(100);
-//		p.setDescricao("Pedido teste");
-//		p.setPedidoFinalizado(false);
-//		pedidos.add(p);
-		
+	private void carregarPedidos() {		
 		//carregar pedidos associados ao departamento do usuario
 		Funcionario funcionario = funcionarioDAO.buscarFuncionarioPorLogin(UsuarioUtil.getUsuarioLogado().getLogin());
 		
