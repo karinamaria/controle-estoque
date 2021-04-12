@@ -5,6 +5,8 @@ Sistema de Controle de Estoque
    * [Como usar](#como-usar)
       * [Pre-Requisitos](#pre-requisitos)
       * [Clonar projeto](#clonar-projeto)
+      * [Criar banco](#criar-banco)
+      * [Configurar Hibernate](#configurar-hibernate)
    * [Tecnologias](#tecnologias)
    * [Autoras](#Autoras)
 <!--te-->
@@ -21,7 +23,17 @@ O  objetivo do projeto Ã© simular um sistema de controle de estoque. Para isso, 
       ```
       git clone https://github.com/karinamaria/ProjetoGomoku.git
       ```
-
+  # Criar banco
+  	  No PostgreSQL crie um banco chamado `controle-estoque`
+  # Configurar Hibernate
+  	  1. No projeto clonado, vá até o arquivo `persistence.xml` no caminho `src/main/resources/META-INF/persistence.xml`
+  	  2. Vá ate as seguintes linhas
+  	  ```
+  	   <property name="javax.persistence.jdbc.user" value="postgres" /> 
+       <property name="javax.persistence.jdbc.password" value="root" />
+      ```
+      E troque o valor das linhas para configuração do seu banco de dados.
+  	  
 # Tecnologias
 - Java (versÃ£o 14)
 - JavaFx

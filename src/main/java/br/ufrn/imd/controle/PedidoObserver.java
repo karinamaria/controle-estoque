@@ -60,7 +60,6 @@ public class PedidoObserver implements Observer<Pedido> {
 			for (Pedido p : pedidosACumprir) {
 				finalizarPedido(p);
 			}
-
 		}
 	}
 
@@ -74,7 +73,6 @@ public class PedidoObserver implements Observer<Pedido> {
 			}
 		}
 		p.setPedidoFinalizado(true);
-		update(p);
 
 	}
 
