@@ -56,7 +56,7 @@ public class PedidoObserver implements Observer<Pedido> {
 			}
 		}
 
-		if (ehPossivelRealizarPedido) {
+		if (!pedidosACumprir.isEmpty()) {
 			for (Pedido p : pedidosACumprir) {
 				finalizarPedido(p);
 			}
