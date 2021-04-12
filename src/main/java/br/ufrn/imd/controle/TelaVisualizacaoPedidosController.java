@@ -67,7 +67,7 @@ public class TelaVisualizacaoPedidosController implements Initializable {
 		pedidos.add(p);*/
 		
 		//carregar todos os pedidos do banco de dados
-		pedidoDAO.findAll();
+		pedidos = pedidoDAO.findAll();
 		obsPedidos = FXCollections.observableArrayList(pedidos);
 		tabelaPedidos.setItems(obsPedidos);
 	}
